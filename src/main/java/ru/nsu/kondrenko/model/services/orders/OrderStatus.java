@@ -1,0 +1,13 @@
+package ru.nsu.kondrenko.model.services.orders;
+
+public enum OrderStatus {
+    SUCCESS,
+    ORDER_CREATED,
+    ORDER_NOT_FOUND,
+    ORDER_WAITING_PRODUCTION_OR_SUPPLY,
+    UNKNOWN_ORDER_DRUG,
+    UNKNOWN_ORDER_ADMINISTRATION_ROUTE,
+    ORDER_IS_ALREADY_OBTAINED,
+    ORDER_ID_ALREADY_PAID_FOR,
+    INTERNAL_ERROR
+}
