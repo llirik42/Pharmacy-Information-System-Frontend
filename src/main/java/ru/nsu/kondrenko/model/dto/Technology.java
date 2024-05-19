@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.util.List;
 
 @Data
@@ -14,7 +15,7 @@ public class Technology {
     private Drug drug;
 
     @JsonAlias("cooking_time")
-    private int cookingTime;
+    private Time cookingTime;
 
     private int amount;
 
