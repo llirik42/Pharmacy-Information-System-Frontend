@@ -53,7 +53,7 @@ public class DrugServiceImpl implements DrugService {
     public List<StoredDrug> getMinimalAmountDrugs(Integer drugTypeId) throws DrugServiceException {
         return fetchStoredDrugs(
                 getMinimalAmountDrugsUrl(drugTypeId),
-                "Fetching minimal amount drugs"
+                "Fetching minimal amount drugs failed"
         );
     }
 
@@ -61,7 +61,7 @@ public class DrugServiceImpl implements DrugService {
     public List<UsedDrug> getUsedDrugs(Date periodStart, Date periodEnd) throws DrugServiceException {
         return fetchUsedDrugs(
                 getUsedDrugsUrl(periodStart, periodEnd),
-                "Fetching user drugs failed"
+                "Fetching user drugs failed failed"
         );
     }
 

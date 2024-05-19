@@ -23,7 +23,7 @@ public class DrugTypeServiceImpl implements DrugTypeService {
     public List<DrugType> getDrugTypes() throws DrugTypeServiceException {
         return fetchDrugTypes(
                 getDrugTypesUrl(),
-                "Fetching drug types"
+                "Fetching drug types failed"
         );
     }
 
@@ -31,7 +31,7 @@ public class DrugTypeServiceImpl implements DrugTypeService {
     public List<DrugType> getCriticalAmountDrugTypes() throws DrugTypeServiceException {
         return fetchDrugTypes(
                 getCriticalAmountDrugTypesUrl(),
-                "Fetching critical amount drug types"
+                "Fetching critical amount drug types failed"
         );
     }
 
