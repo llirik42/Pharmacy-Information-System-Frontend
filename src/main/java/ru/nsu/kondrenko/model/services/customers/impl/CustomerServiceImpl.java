@@ -4,6 +4,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import ru.nsu.kondrenko.model.dto.Customer;
+import ru.nsu.kondrenko.model.dto.FrequentCustomer;
 import ru.nsu.kondrenko.model.services.ServiceConfig;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.customers.exceptions.CustomerServiceException;
@@ -25,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getCustomers() throws CustomerServiceException {
-        return getAbstractCustomers(
+        return fetchCustomers(
                 getCustomersUrl(),
                 "Fetching all customers failed"
         );
@@ -33,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getWaitingSuppliesCustomers(Integer drugTypeId) throws CustomerServiceException {
-        return getAbstractCustomers(
+        return fetchCustomers(
                 getWaitingSuppliesCustomersUrl(drugTypeId),
                 "Fetching waiting supplies customers failed"
         );
@@ -41,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getOrderedSomethingCustomers(Date periodStart, Date periodEnd, Integer drugId, Integer drugTypeId) throws CustomerServiceException {
-        return getAbstractCustomers(
+        return fetchCustomers(
                 getOrderedSomethingCustomersUrl(
                         periodStart,
                         periodEnd,
@@ -52,7 +53,18 @@ public class CustomerServiceImpl implements CustomerService {
         );
     }
 
-    private List<Customer> getAbstractCustomers(String url, String errorMessage) throws CustomerServiceException {
+    @Override
+    public List<FrequentCustomer> getFrequentCustomers(Integer drugId, Integer drugTypeId) throws CustomerServiceException {
+        return fetchFrequentCustomers(
+                getFrequentCustomersUrl(
+                        drugId,
+                        drugTypeId
+                ),
+                "Fetching frequent customers failed"
+        );
+    }
+
+    private List<Customer> fetchCustomers(String url, String errorMessage) throws CustomerServiceException {
         final RestTemplate restTemplate = new RestTemplate();
 
         try {
@@ -60,7 +72,26 @@ public class CustomerServiceImpl implements CustomerService {
                     url,
                     HttpMethod.GET,
                     null,
-                    new ParameterizedTypeReference<List<Customer>>() {}
+                    new ParameterizedTypeReference<List<Customer>>() {
+
+                    }
+            ).getBody();
+        } catch (Exception exception) {
+            throw new CustomerServiceException(errorMessage, exception);
+        }
+    }
+
+    private List<FrequentCustomer> fetchFrequentCustomers(String url, String errorMessage) throws CustomerServiceException {
+        final RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            return restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<FrequentCustomer>>() {
+
+                    }
             ).getBody();
         } catch (Exception exception) {
             throw new CustomerServiceException(errorMessage, exception);
@@ -96,6 +127,31 @@ public class CustomerServiceImpl implements CustomerService {
         }
         if (drugTypeId != null) {
             url = String.format("%s&drug_type_id=%s", url, drugTypeId);
+        }
+
+        return url;
+    }
+
+    private String getFrequentCustomersUrl(Integer drugId, Integer drugTypeId) {
+        final boolean isDrugNotNull = drugId != null;
+        final boolean isTypeNotNull = drugTypeId != null;
+
+        String url = String.format("http://%s:%s/customers/frequent", address, port);
+
+        if (isDrugNotNull || isTypeNotNull) {
+            url = String.format("%s?", url);
+        }
+
+        if (isDrugNotNull) {
+            url = String.format("%sdrug_id=%s", url, drugId);
+        }
+
+        if (isTypeNotNull) {
+            if (isDrugNotNull) {
+                url = String.format("%s&", url);
+            }
+
+            url = String.format("%sdrug_type_id=%s", url, drugTypeId);
         }
 
         return url;
