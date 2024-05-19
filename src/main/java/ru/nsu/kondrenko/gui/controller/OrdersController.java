@@ -64,7 +64,6 @@ public class OrdersController implements ActionListener {
             }
 
             table.setModel(new DefaultTableModel(data, COLUMNS));
-            table.getColumnModel().getColumn(0).setPreferredWidth(500);
         } catch (OrderServiceException exception) {
             view.showError(exception.getLocalizedMessage());
         }
