@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DrugType {
+    private int id;
+
     private String name;
 
     private boolean isCookable;
