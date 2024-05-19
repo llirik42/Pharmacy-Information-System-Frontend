@@ -15,7 +15,7 @@ public interface DrugService {
 
     List<Drug> getCriticalAmountDrugs() throws DrugServiceException;
 
-    List<StoredDrug> getMinimalAmountDrigs(Integer drugTypeId) throws DrugServiceException;
+    List<StoredDrug> getMinimalAmountDrugs(Integer drugTypeId) throws DrugServiceException;
 
     List<UsedDrug> getUsedDrugs(Date periodStart, Date periodEnd) throws DrugServiceException;
 }
