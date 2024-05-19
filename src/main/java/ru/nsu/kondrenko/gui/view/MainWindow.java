@@ -2,6 +2,7 @@ package ru.nsu.kondrenko.gui.view;
 
 import ru.nsu.kondrenko.gui.controller.*;
 
+import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.*;
 
@@ -21,7 +22,7 @@ public class MainWindow extends Window {
             UsedDrugsController usedDrugsController,
             CriticalAmountDrugsController criticalAmountDrugsController,
             ProductionComponentsController productionComponentsController,
-            MinimalAmounDrugsController minimalAmounDrugsController,
+            MinimalAmountDrugsController minimalAmountDrugsController,
             TechnologiesController technologiesController) {
         add(new OptionsPanel(
                 createOrderController,
@@ -38,15 +39,16 @@ public class MainWindow extends Window {
                 usedDrugsController,
                 criticalAmountDrugsController,
                 productionComponentsController,
-                minimalAmounDrugsController,
+                minimalAmountDrugsController,
                 technologiesController
         ), BorderLayout.WEST);
 
         final CentralPanel centralPanel = new CentralPanel();
         add(centralPanel, BorderLayout.CENTER);
-        final TableModel tableModel = centralPanel.getTable().getModel();
 
-        ordersController.setTableModel(tableModel);
+        final JTable table = centralPanel.getTable();
+
+        ordersController.setTable(table);
 
         pack();
     }

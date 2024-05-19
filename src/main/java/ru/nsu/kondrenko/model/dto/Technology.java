@@ -1,6 +1,5 @@
 package ru.nsu.kondrenko.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Technology {
+    private int id;
+
     private Drug drug;
 
     @JsonProperty("cooking_time")

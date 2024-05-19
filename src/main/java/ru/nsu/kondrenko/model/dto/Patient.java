@@ -12,6 +12,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Patient {
+    private int id;
+
     @JsonProperty("full_name")
     private String fullName;
 

@@ -3,14 +3,14 @@ package ru.nsu.kondrenko.gui.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import ru.nsu.kondrenko.gui.view.View;
-import ru.nsu.kondrenko.model.services.production.ProductionService;
+import ru.nsu.kondrenko.model.services.drugs.DrugService;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @RequiredArgsConstructor
-public class ProductionComponentsController implements ActionListener {
-    private final ProductionService productionService;
+public class MinimalAmountDrugsController implements ActionListener {
+    private final DrugService drugService;
 
     @Setter
     private View view;

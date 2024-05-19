@@ -12,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Prescription {
+    private int id;
+
     private String diagnosis;
 
     private Patient patient;
