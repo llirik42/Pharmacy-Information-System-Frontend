@@ -5,6 +5,8 @@ import ru.nsu.kondrenko.gui.controller.options.*;
 import javax.swing.*;
 import java.awt.*;
 
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
+
 public class MainWindow extends Window {
     public MainWindow(
             CreateOrderController createOrderController,
@@ -23,7 +25,7 @@ public class MainWindow extends Window {
             ProductionComponentsController productionComponentsController,
             MinimalAmountDrugsController minimalAmountDrugsController,
             TechnologiesController technologiesController) {
-        add(new OptionsPanel(
+        final JPanel optionsPanel = new OptionsPanel(
                 createOrderController,
                 payOrderController,
                 obtainOrderController,
@@ -40,7 +42,10 @@ public class MainWindow extends Window {
                 productionComponentsController,
                 minimalAmountDrugsController,
                 technologiesController
-        ), BorderLayout.WEST);
+        );
+
+        final JScrollPane scrollPane = new JScrollPane(optionsPanel);
+        add(scrollPane, BorderLayout.WEST);
 
         final CentralPanel centralPanel = new CentralPanel();
         add(centralPanel, BorderLayout.CENTER);

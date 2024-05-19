@@ -1,7 +1,5 @@
 package ru.nsu.kondrenko.gui.view;
 
-import ru.nsu.kondrenko.gui.controller.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -28,8 +26,10 @@ public class OptionsPanel extends JPanel {
         add(new Option("Создать заказ", createOrderListener));
         add(new Option("Оплатить заказ", payOrderListener));
         add(new Option("Забрать заказ", obtainOrderListener));
-        add(new Option("Все медикаменты", drugsListener));
+        add(new Option("Информация о заказе", null));
         add(new Option("Все заказы", ordersListener));
+        add(new Option("Информация о медикаменте", null));
+        add(new Option("Все медикаменты", drugsListener));
         add(new Option("Забытые заказы", forgottenOrdersListener));
         add(new Option("Заказы в производстве", productionOrdersListener));
         add(new Option("Ждущие клиенты", waitingCustomersListener));
@@ -38,8 +38,8 @@ public class OptionsPanel extends JPanel {
         add(new Option("Популярные медикаменты", popularDrugsListener));
         add(new Option("Использованные медикаменты", usedDrugsListener));
         add(new Option("Медикаменты с критической нормой/закончившиеся", criticalAmountDrugsListener));
-        add(new Option("Требуемые для производства препараты", productionComponentsListener));
+        add(new Option("Требуемые для производства медикаменты", productionComponentsListener));
         add(new Option("Медикаменты с минимальным запасом", minimalAmountDrugsListener));
-        add(new Option("Технологии", technologiesListener));
+        add(new Option("Все технологии", technologiesListener));
     }
 }
