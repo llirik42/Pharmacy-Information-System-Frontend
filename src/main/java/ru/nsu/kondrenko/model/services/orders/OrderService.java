@@ -10,7 +10,7 @@ import java.util.List;
 public interface OrderService {
     List<Order> getOrders() throws OrderServiceException;
 
-    List<Order> getForgotterOrders() throws OrderServiceException;
+    List<Order> getForgottenOrders() throws OrderServiceException;
 
     List<Order> getOrdersInProduction() throws OrderServiceException;
 

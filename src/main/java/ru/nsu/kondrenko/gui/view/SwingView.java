@@ -1,7 +1,8 @@
 package ru.nsu.kondrenko.gui.view;
 
 import com.formdev.flatlaf.intellijthemes.FlatGrayIJTheme;
-import ru.nsu.kondrenko.gui.controller.*;
+import ru.nsu.kondrenko.gui.controller.fillers.*;
+import ru.nsu.kondrenko.gui.controller.options.*;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.doctors.DoctorService;
 import ru.nsu.kondrenko.model.services.drug_types.DrugTypeService;
@@ -29,6 +30,14 @@ public class SwingView implements View {
             TechnologyService technologyService) {
         FlatGrayIJTheme.setup();
 
+        final TableFiller orderFiller = new OrderTableFiller();
+        final TableFiller drugFiller = new DrugTableFiller();
+        final TableFiller customerFiller = new CustomerTableFiller();
+        final TableFiller frequentCustomerFiller = new FrequentCustomerTableFiller();
+        final TableFiller usedDrugFiller = new UsedDrugTableFiller();
+        final TableFiller technologyFiller = new TechnologyTableFiller();
+        final TableFiller storedDrugFiller = new StoredDrugTableFiller();
+
         final CreateOrderController createOrderController = new CreateOrderController(
                 orderService
         );
@@ -39,43 +48,55 @@ public class SwingView implements View {
                 orderService
         );
         final DrugsController drugsController = new DrugsController(
-                drugService
+                drugService,
+                drugFiller
         );
         final OrdersController ordersController = new OrdersController(
-                orderService
+                orderService,
+                orderFiller
         );
         final ForgottenOrdersController forgottenOrdersController = new ForgottenOrdersController(
-                orderService
+                orderService,
+                orderFiller
         );
         final ProductionOrdersController productionOrdersController = new ProductionOrdersController(
-                orderService
+                orderService,
+                orderFiller
         );
         final WaitingCustomersController waitingCustomersController = new WaitingCustomersController(
-                customerService
+                customerService,
+                customerFiller
         );
         final FrequentCustomersController frequentCustomersController = new FrequentCustomersController(
-                customerService
+                customerService,
+                frequentCustomerFiller
         );
         final OrderedSomethingCustomersController orderedSomethingCustomersController = new OrderedSomethingCustomersController(
-                customerService
+                customerService,
+                customerFiller
         );
         final PopularDrugsController popularDrugsController = new PopularDrugsController(
-                drugService
+                drugService,
+                usedDrugFiller
         );
         final UsedDrugsController usedDrugsController = new UsedDrugsController(
-                drugService
+                drugService,
+                usedDrugFiller
         );
         final CriticalAmountDrugsController criticalAmountDrugsController = new CriticalAmountDrugsController(
-                drugService
+                drugService,
+                drugFiller
         );
         final ProductionComponentsController productionComponentsController = new ProductionComponentsController(
                 productionService
         );
         final MinimalAmountDrugsController minimalAmountDrugsController = new MinimalAmountDrugsController(
-                drugService
+                drugService,
+                storedDrugFiller
         );
         final TechnologiesController technologiesController = new TechnologiesController(
-                technologyService
+                technologyService,
+                technologyFiller
         );
 
         createOrderController.setView(this);

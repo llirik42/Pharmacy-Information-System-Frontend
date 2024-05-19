@@ -1,9 +1,8 @@
 package ru.nsu.kondrenko.gui.view;
 
-import ru.nsu.kondrenko.gui.controller.*;
+import ru.nsu.kondrenko.gui.controller.options.*;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 import java.awt.*;
 
 public class MainWindow extends Window {
@@ -48,7 +47,17 @@ public class MainWindow extends Window {
 
         final JTable table = centralPanel.getTable();
 
+        orderedSomethingCustomersController.setTable(table);
+        minimalAmountDrugsController.setTable(table);
+        usedDrugsController.setTable(table);
+        frequentCustomersController.setTable(table);
+        criticalAmountDrugsController.setTable(table);
+        productionOrdersController.setTable(table);
+        waitingCustomersController.setTable(table);
+        popularDrugsController.setTable(table);
+        forgottenOrdersController.setTable(table);
         ordersController.setTable(table);
+        technologiesController.setTable(table);
         drugsController.setTable(table);
 
         pack();

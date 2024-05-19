@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getForgotterOrders() throws OrderServiceException {
+    public List<Order> getForgottenOrders() throws OrderServiceException {
         return fetchOrders(
                 getForgottenOrdersUrl(),
                 "Fetching forgotten orders failed"
