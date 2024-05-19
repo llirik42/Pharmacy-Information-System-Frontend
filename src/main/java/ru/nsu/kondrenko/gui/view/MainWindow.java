@@ -47,6 +47,7 @@ public class MainWindow extends Window {
 
         final JTable table = centralPanel.getTable();
 
+        productionComponentsController.setTable(table);
         orderedSomethingCustomersController.setTable(table);
         minimalAmountDrugsController.setTable(table);
         usedDrugsController.setTable(table);

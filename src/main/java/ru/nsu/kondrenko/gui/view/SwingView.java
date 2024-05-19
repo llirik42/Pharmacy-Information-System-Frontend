@@ -37,6 +37,7 @@ public class SwingView implements View {
         final TableFiller usedDrugFiller = new UsedDrugTableFiller();
         final TableFiller technologyFiller = new TechnologyTableFiller();
         final TableFiller storedDrugFiller = new StoredDrugTableFiller();
+        final TableFiller productionComponentFiller = new ProductionComponentTableFiller();
 
         final CreateOrderController createOrderController = new CreateOrderController(
                 orderService
@@ -88,7 +89,8 @@ public class SwingView implements View {
                 drugFiller
         );
         final ProductionComponentsController productionComponentsController = new ProductionComponentsController(
-                productionService
+                productionService,
+                productionComponentFiller
         );
         final MinimalAmountDrugsController minimalAmountDrugsController = new MinimalAmountDrugsController(
                 drugService,
