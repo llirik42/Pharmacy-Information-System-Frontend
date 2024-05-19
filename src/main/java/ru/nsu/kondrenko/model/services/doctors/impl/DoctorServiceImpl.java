@@ -44,7 +44,6 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
 
-
     private String getDoctorsUrl() {
         return String.format("http://%s:%s/doctors/", address, port);
     }
