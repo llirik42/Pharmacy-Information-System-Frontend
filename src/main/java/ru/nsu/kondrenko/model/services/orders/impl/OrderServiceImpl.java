@@ -48,27 +48,46 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponse createOrder(Prescription prescription) throws OrderServiceException {
-        return null;
+        return postOrderResponse(
+                getOrdersUrl(),
+                prescription,
+                "Creating order failed"
+        );
     }
 
     @Override
     public OrderResponse setOrderCustomer(int orderId, Customer customer) throws OrderServiceException {
-        return null;
+        return postOrderResponse(
+                getOrderCustomersUrl(orderId),
+                customer,
+                "Setting customer of order failed"
+        );
     }
 
     @Override
     public OrderResponse deleteOrderCustomer(int orderId) throws OrderServiceException {
-        return null;
+        return deleteOrderResponse(
+                getOrderCustomersUrl(orderId),
+                "Deleting customer of order failed"
+        );
     }
 
     @Override
     public OrderResponse payForOrder(int orderId) throws OrderServiceException {
-        return null;
+        return postOrderResponse(
+                getPayForOrderUrl(orderId),
+                null,
+                "Payment of order failed"
+        );
     }
 
     @Override
     public OrderResponse obtainOrder(int orderId) throws OrderServiceException {
-        return null;
+        return postOrderResponse(
+                getObtainOrderUrl(orderId),
+                null,
+                "Obtaining order failed"
+        );
     }
 
     private List<Order> fetchOrders(String url, String errorMessage) throws OrderServiceException {
@@ -88,8 +107,41 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    private OrderResponse postOrderResponse(String url, Object request, String errorMessage) throws OrderServiceException {
+        final RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            return restTemplate.postForEntity(
+                    url,
+                    request,
+                    OrderResponse.class
+            ).getBody();
+        } catch (Exception exception) {
+            throw new OrderServiceException(errorMessage, exception);
+        }
+    }
+
+    private OrderResponse deleteOrderResponse(String url, String errorMessage) throws OrderServiceException {
+        final RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            return restTemplate.exchange(
+                    url,
+                    HttpMethod.DELETE,
+                    null,
+                    OrderResponse.class
+            ).getBody();
+        } catch (Exception exception) {
+            throw new OrderServiceException(errorMessage, exception);
+        }
+    }
+
     private String getOrdersUrl() {
         return String.format("http://%s:%s/orders/", address, port);
+    }
+
+    private String getOrderUrl(int orderId) {
+        return getOrdersUrl() + String.format("%s/", orderId);
     }
 
     private String getForgottenOrdersUrl() {
@@ -98,5 +150,17 @@ public class OrderServiceImpl implements OrderService {
 
     private String getOrdersInProductionUrl() {
         return getOrdersUrl() + "/production/";
+    }
+
+    private String getOrderCustomersUrl(int orderId) {
+        return getOrderUrl(orderId) + "customers";
+    }
+
+    private String getPayForOrderUrl(int orderId) {
+        return getOrderUrl(orderId) + "/pay";
+    }
+
+    private String getObtainOrderUrl(int orderId) {
+        return getOrderUrl(orderId) + "/obtain";
     }
 }

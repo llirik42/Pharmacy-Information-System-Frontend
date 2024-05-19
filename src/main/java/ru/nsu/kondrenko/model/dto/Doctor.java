@@ -1,6 +1,6 @@
 package ru.nsu.kondrenko.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Doctor {
-    @JsonAlias("full_name")
+    @JsonProperty("full_name")
     private String fullName;
 }

@@ -1,6 +1,7 @@
 package ru.nsu.kondrenko.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,6 @@ public class DrugType {
 
     private String name;
 
-    @JsonAlias("cookable")
+    @JsonProperty("cookable")
     private boolean isCookable;
 }

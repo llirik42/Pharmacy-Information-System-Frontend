@@ -1,6 +1,7 @@
 package ru.nsu.kondrenko.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class StoredDrug {
     private Drug drug;
 
-    @JsonAlias("stored_number")
+    @JsonProperty("stored_number")
     private int storedNumber;
 }

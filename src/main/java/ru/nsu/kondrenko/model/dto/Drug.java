@@ -1,6 +1,7 @@
 package ru.nsu.kondrenko.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,13 +16,13 @@ public class Drug {
 
     private int cost;
 
-    @JsonAlias("shelf_life")
+    @JsonProperty("shelf_life")
     private int shelfLife;
 
-    @JsonAlias("critical_amount")
+    @JsonProperty("critical_amount")
     private int criticalAmount;
 
-    @JsonAlias("drug_type")
+    @JsonProperty("drug_type")
     private DrugType drugType;
 
     private String description;

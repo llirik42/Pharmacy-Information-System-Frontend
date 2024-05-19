@@ -1,6 +1,7 @@
 package ru.nsu.kondrenko.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,9 +12,9 @@ import lombok.NoArgsConstructor;
 public class PrescriptionItem {
     private Drug drug;
 
-    @JsonAlias("amount")
+    @JsonProperty("amount")
     private int drugAmount;
 
-    @JsonAlias("administration_route")
+    @JsonProperty("administration_route")
     private AdministrationRoute administrationRoute;
 }
