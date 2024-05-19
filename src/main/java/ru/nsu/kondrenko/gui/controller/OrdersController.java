@@ -9,7 +9,6 @@ import ru.nsu.kondrenko.model.services.orders.exceptions.OrderServiceException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -65,7 +64,7 @@ public class OrdersController implements ActionListener {
             }
 
             table.setModel(new DefaultTableModel(data, COLUMNS));
-            table.revalidate();
+            table.getColumnModel().getColumn(0).setPreferredWidth(500);
         } catch (OrderServiceException exception) {
             view.showError(exception.getLocalizedMessage());
         }
