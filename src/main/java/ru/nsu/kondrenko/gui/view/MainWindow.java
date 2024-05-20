@@ -5,8 +5,6 @@ import ru.nsu.kondrenko.gui.controller.options.*;
 import javax.swing.*;
 import java.awt.*;
 
-import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
-
 public class MainWindow extends Window {
     public MainWindow(
             CreateOrderController createOrderController,
@@ -16,7 +14,7 @@ public class MainWindow extends Window {
             OrdersController ordersController,
             ForgottenOrdersController forgottenOrdersController,
             ProductionOrdersController productionOrdersController,
-            WaitingCustomersController waitingCustomersController,
+            WaitingSuppliesCustomersController waitingCustomersController,
             FrequentCustomersController frequentCustomersController,
             OrderedSomethingCustomersController orderedSomethingCustomersController,
             PopularDrugsController popularDrugsController,

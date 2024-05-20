@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class WaitingCustomersController implements ActionListener {
+public class WaitingSuppliesCustomersController implements ActionListener {
     private final CustomerService customerService;
 
     private final TableFiller filler;
@@ -28,10 +28,14 @@ public class WaitingCustomersController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            final List<Customer> customers = customerService.getWaitingSuppliesCustomers(
+            final List<Customer> waitingSuppliesCustomers = customerService.getWaitingSuppliesCustomers(
                     null
             );
-            filler.fillTable(table, customers.toArray());
+            filler.fillTable(table, waitingSuppliesCustomers.toArray());
+
+            if (waitingSuppliesCustomers.isEmpty()) {
+                view.showInfo("Клиенты, ожидающие поставки, не найдены");
+            }
         } catch (CustomerServiceException ignored) {
             view.showNoConnectionError();
         }

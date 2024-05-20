@@ -38,9 +38,7 @@ public class UsedDrugsController implements ActionListener {
         this.filler = filler;
         startDatePicker = createDatePicker();
         endDatePicker = createDatePicker();
-
-        dialogPanel = new JPanel();
-        dialogPanel.setLayout(new GridLayout(2, 2));
+        dialogPanel = Utils.createDialogPanel(2);
         Utils.addComponentToPanel(dialogPanel, "Начальная дата", startDatePicker);
         Utils.addComponentToPanel(dialogPanel, "Конечная дата", endDatePicker);
     }
@@ -58,6 +56,10 @@ public class UsedDrugsController implements ActionListener {
                     endDatePicker.getDate()
             );
             filler.fillTable(table, usedDrugs.toArray());
+
+            if (usedDrugs.isEmpty()) {
+                view.showInfo("Использованные медикаменты не найдены");
+            }
         } catch (DrugServiceException ignored) {
             view.showNoConnectionError();
         }

@@ -28,8 +28,12 @@ public class ProductionOrdersController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            final List<Order> orders = orderService.getOrdersInProduction();
-            filler.fillTable(table, orders.toArray());
+            final List<Order> ordersInProduction = orderService.getOrdersInProduction();
+            filler.fillTable(table, ordersInProduction.toArray());
+
+            if (ordersInProduction.isEmpty()) {
+                view.showInfo("Заказы в производстве не найдены");
+            }
         } catch (OrderServiceException ignored) {
             view.showNoConnectionError();
         }

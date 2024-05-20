@@ -32,6 +32,10 @@ public class MinimalAmountDrugsController implements ActionListener {
                     null
             );
             filler.fillTable(table, minimalAmountDrugs.toArray());
+
+            if (minimalAmountDrugs.isEmpty()) {
+                view.showInfo("Медикаменты с минимальным запасом не найдены");
+            }
         } catch (DrugServiceException ignored) {
             view.showNoConnectionError();
         }

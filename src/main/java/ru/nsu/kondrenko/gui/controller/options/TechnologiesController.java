@@ -34,6 +34,10 @@ public class TechnologiesController implements ActionListener {
                     false
             );
             filler.fillTable(table, technologies.toArray());
+
+            if (technologies.isEmpty()) {
+                view.showInfo("Технологии не найдены");
+            }
         } catch (TechnologyServiceException ignored) {
             view.showNoConnectionError();
         }

@@ -64,7 +64,7 @@ public class SwingView implements View {
                 orderService,
                 orderFiller
         );
-        final WaitingCustomersController waitingCustomersController = new WaitingCustomersController(
+        final WaitingSuppliesCustomersController waitingCustomersController = new WaitingSuppliesCustomersController(
                 customerService,
                 customerFiller
         );
@@ -151,6 +151,11 @@ public class SwingView implements View {
     }
 
     @Override
+    public void showEmptyResultInfo() {
+        showInfo("Ничего не найдено");
+    }
+
+    @Override
     public boolean showConfirmationDialog(String title, JPanel content) {
         return JOptionPane.showConfirmDialog(
                 mainWindow,
@@ -167,6 +172,16 @@ public class SwingView implements View {
                 errorMessage,
                 "Ошибка",
                 JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    @Override
+    public void showInfo(String infoMessage) {
+        JOptionPane.showMessageDialog(
+                mainWindow,
+                infoMessage,
+                "Сообщение",
+                JOptionPane.INFORMATION_MESSAGE
         );
     }
 }

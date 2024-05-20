@@ -33,6 +33,10 @@ public class FrequentCustomersController implements ActionListener {
                     null
             );
             filler.fillTable(table, frequentCustomers.toArray());
+
+            if (frequentCustomers.isEmpty()) {
+                view.showInfo("Постоянные клиенты не найдены");
+            }
         } catch (CustomerServiceException ignored) {
             view.showNoConnectionError();
         }

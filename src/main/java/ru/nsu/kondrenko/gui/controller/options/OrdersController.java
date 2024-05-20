@@ -30,6 +30,10 @@ public class OrdersController implements ActionListener {
         try {
             final List<Order> orders = orderService.getOrders();
             filler.fillTable(table, orders.toArray());
+
+            if (orders.isEmpty()) {
+                view.showInfo("Заказы не найдены");
+            }
         } catch (OrderServiceException ignored) {
             view.showNoConnectionError();
         }

@@ -30,6 +30,10 @@ public class DrugsController implements ActionListener {
         try {
             final List<Drug> drugs = drugService.getDrugs();
             filler.fillTable(table, drugs.toArray());
+
+            if (drugs.isEmpty()) {
+                view.showInfo("Медикаменты не найдены");
+            }
         } catch (DrugServiceException ignored) {
             view.showNoConnectionError();
         }

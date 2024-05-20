@@ -33,6 +33,10 @@ public class PopularDrugsController implements ActionListener {
                     null
             );
             filler.fillTable(table, popularDrugs.toArray());
+
+            if (popularDrugs.isEmpty()) {
+                view.showInfo("Популярные медикаменты не найдены");
+            }
         } catch (DrugServiceException ignored) {
             view.showNoConnectionError();
         }

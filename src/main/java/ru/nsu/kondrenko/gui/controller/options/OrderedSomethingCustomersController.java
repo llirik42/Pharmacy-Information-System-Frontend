@@ -35,6 +35,10 @@ public class OrderedSomethingCustomersController implements ActionListener {
                     null
             );
             filler.fillTable(table, orderedSomethingCustomers.toArray());
+
+            if (orderedSomethingCustomers.isEmpty()) {
+                view.showInfo("Клиенты, заказавшие медикаменты, не найдены");
+            }
         } catch (CustomerServiceException ignored) {
             view.showNoConnectionError();
         }

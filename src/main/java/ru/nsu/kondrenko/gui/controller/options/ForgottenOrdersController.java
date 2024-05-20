@@ -30,6 +30,10 @@ public class ForgottenOrdersController implements ActionListener {
         try {
             final List<Order> forgottenOrders = orderService.getForgottenOrders();
             filler.fillTable(table, forgottenOrders.toArray());
+
+            if (forgottenOrders.isEmpty()) {
+                view.showInfo("Забытые заказы не найдены");
+            }
         } catch (OrderServiceException ignored) {
             view.showNoConnectionError();
         }

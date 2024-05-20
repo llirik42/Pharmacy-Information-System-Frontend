@@ -30,6 +30,10 @@ public class CriticalAmountDrugsController implements ActionListener {
         try {
             final List<Drug> criticalAmountDrugs = drugService.getCriticalAmountDrugs();
             filler.fillTable(table, criticalAmountDrugs.toArray());
+
+            if (criticalAmountDrugs.isEmpty()) {
+                view.showInfo("Лекарства с критической нормой не найдены");
+            }
         } catch (DrugServiceException ignored) {
             view.showNoConnectionError();
         }

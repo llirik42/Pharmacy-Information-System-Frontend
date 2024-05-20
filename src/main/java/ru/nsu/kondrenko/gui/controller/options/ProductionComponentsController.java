@@ -30,6 +30,10 @@ public class ProductionComponentsController implements ActionListener {
         try {
             final List<ProductionComponent> productionComponents = productionService.getProductionComponents();
             filler.fillTable(table, productionComponents.toArray());
+
+            if (productionComponents.isEmpty()) {
+                view.showInfo("Медикаменты, требуемые для производства, не найдены");
+            }
         } catch (ProductionServiceException ignored) {
             view.showNoConnectionError();
         }
