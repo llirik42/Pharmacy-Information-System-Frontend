@@ -30,8 +30,8 @@ public class ProductionOrdersController implements ActionListener {
         try {
             final List<Order> orders = orderService.getOrdersInProduction();
             filler.fillTable(table, orders.toArray());
-        } catch (OrderServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (OrderServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

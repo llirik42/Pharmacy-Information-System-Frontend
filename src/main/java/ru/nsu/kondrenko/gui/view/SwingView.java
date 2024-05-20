@@ -146,11 +146,16 @@ public class SwingView implements View {
     }
 
     @Override
+    public void showNoConnectionError() {
+        showError(Constants.NO_CONNECTION_ERROR_MESSAGE);
+    }
+
+    @Override
     public void showError(String errorMessage) {
         JOptionPane.showMessageDialog(
                 mainWindow,
                 errorMessage,
-                "Error",
+                "Ошибка",
                 JOptionPane.ERROR_MESSAGE
         );
     }

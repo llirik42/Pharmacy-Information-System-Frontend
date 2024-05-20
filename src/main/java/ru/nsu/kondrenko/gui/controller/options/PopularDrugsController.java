@@ -4,13 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import ru.nsu.kondrenko.gui.controller.fillers.TableFiller;
 import ru.nsu.kondrenko.gui.view.View;
-import ru.nsu.kondrenko.model.dto.Drug;
 import ru.nsu.kondrenko.model.dto.UsedDrug;
 import ru.nsu.kondrenko.model.services.drugs.DrugService;
 import ru.nsu.kondrenko.model.services.drugs.exceptions.DrugServiceException;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -35,8 +33,8 @@ public class PopularDrugsController implements ActionListener {
                     null
             );
             filler.fillTable(table, popularDrugs.toArray());
-        } catch (DrugServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (DrugServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

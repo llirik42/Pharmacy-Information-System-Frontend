@@ -30,8 +30,8 @@ public class ProductionComponentsController implements ActionListener {
         try {
             final List<ProductionComponent> productionComponents = productionService.getProductionComponents();
             filler.fillTable(table, productionComponents.toArray());
-        } catch (ProductionServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (ProductionServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

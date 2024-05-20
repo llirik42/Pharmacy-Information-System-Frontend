@@ -35,8 +35,8 @@ public class OrderedSomethingCustomersController implements ActionListener {
                     null
             );
             filler.fillTable(table, orderedSomethingCustomers.toArray());
-        } catch (CustomerServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (CustomerServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

@@ -34,8 +34,8 @@ public class TechnologiesController implements ActionListener {
                     false
             );
             filler.fillTable(table, technologies.toArray());
-        } catch (TechnologyServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (TechnologyServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

@@ -30,8 +30,8 @@ public class DrugsController implements ActionListener {
         try {
             final List<Drug> drugs = drugService.getDrugs();
             filler.fillTable(table, drugs.toArray());
-        } catch (DrugServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (DrugServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

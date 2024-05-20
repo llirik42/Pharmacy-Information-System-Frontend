@@ -30,8 +30,8 @@ public class CriticalAmountDrugsController implements ActionListener {
         try {
             final List<Drug> criticalAmountDrugs = drugService.getCriticalAmountDrugs();
             filler.fillTable(table, criticalAmountDrugs.toArray());
-        } catch (DrugServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (DrugServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

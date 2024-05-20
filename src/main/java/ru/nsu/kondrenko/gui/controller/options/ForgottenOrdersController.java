@@ -30,8 +30,8 @@ public class ForgottenOrdersController implements ActionListener {
         try {
             final List<Order> forgottenOrders = orderService.getForgottenOrders();
             filler.fillTable(table, forgottenOrders.toArray());
-        } catch (OrderServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (OrderServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

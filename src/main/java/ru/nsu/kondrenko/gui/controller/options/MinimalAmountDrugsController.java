@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import ru.nsu.kondrenko.gui.controller.fillers.TableFiller;
 import ru.nsu.kondrenko.gui.view.View;
-import ru.nsu.kondrenko.model.dto.Drug;
 import ru.nsu.kondrenko.model.dto.StoredDrug;
 import ru.nsu.kondrenko.model.services.drugs.DrugService;
 import ru.nsu.kondrenko.model.services.drugs.exceptions.DrugServiceException;
@@ -33,8 +32,8 @@ public class MinimalAmountDrugsController implements ActionListener {
                     null
             );
             filler.fillTable(table, minimalAmountDrugs.toArray());
-        } catch (DrugServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (DrugServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

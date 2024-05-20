@@ -33,8 +33,8 @@ public class UsedDrugsController implements ActionListener {
                     null
             );
             filler.fillTable(table, usedDrugs.toArray());
-        } catch (DrugServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (DrugServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

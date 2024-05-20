@@ -32,8 +32,8 @@ public class WaitingCustomersController implements ActionListener {
                     null
             );
             filler.fillTable(table, customers.toArray());
-        } catch (CustomerServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (CustomerServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

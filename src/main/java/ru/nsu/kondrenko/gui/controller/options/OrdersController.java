@@ -11,7 +11,6 @@ import ru.nsu.kondrenko.model.services.orders.exceptions.OrderServiceException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -31,8 +30,8 @@ public class OrdersController implements ActionListener {
         try {
             final List<Order> orders = orderService.getOrders();
             filler.fillTable(table, orders.toArray());
-        } catch (OrderServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (OrderServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }

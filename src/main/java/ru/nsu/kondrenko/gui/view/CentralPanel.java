@@ -19,7 +19,7 @@ public class CentralPanel extends JPanel {
         table.setAutoResizeMode(AUTO_RESIZE_ALL_COLUMNS);
 
         table.setBackground(Color.WHITE);
-        table.setFont(new Font(Constaints.FONT_FAMILY, Font.PLAIN, 20));
+        table.setFont(new Font(Constants.FONT_FAMILY, Font.PLAIN, 20));
         table.setRowHeight(50);
 
         JScrollPane scrollPane = new JScrollPane(table);

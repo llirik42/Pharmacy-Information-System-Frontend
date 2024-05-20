@@ -33,8 +33,8 @@ public class FrequentCustomersController implements ActionListener {
                     null
             );
             filler.fillTable(table, frequentCustomers.toArray());
-        } catch (CustomerServiceException exception) {
-            view.showError(exception.getLocalizedMessage());
+        } catch (CustomerServiceException ignored) {
+            view.showNoConnectionError();
         }
     }
 }
