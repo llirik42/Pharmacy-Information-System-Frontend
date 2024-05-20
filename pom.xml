@@ -30,11 +30,15 @@
             <artifactId>flatlaf</artifactId>
             <version>3.4</version>
         </dependency>
-
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf-intellij-themes</artifactId>
             <version>3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>no.tornado.databinding</groupId>
+            <artifactId>jxdatepicker-support</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
     <repositories>

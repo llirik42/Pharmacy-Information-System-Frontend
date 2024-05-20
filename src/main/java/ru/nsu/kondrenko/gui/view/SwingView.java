@@ -151,6 +151,16 @@ public class SwingView implements View {
     }
 
     @Override
+    public boolean showConfirmationDialog(String title, JPanel content) {
+        return JOptionPane.showConfirmDialog(
+                mainWindow,
+                content,
+                title,
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION;
+    }
+
+    @Override
     public void showError(String errorMessage) {
         JOptionPane.showMessageDialog(
                 mainWindow,

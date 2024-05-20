@@ -10,7 +10,7 @@ public class UsedDrugTableFiller implements TableFiller {
     private static final String[] COLUMNS = {
             "№",
             "Название",
-            "Кол-во",
+            "Использованное кол-во",
             "Стоимость",
             "Тип",
             "Срок годности (часы)",
