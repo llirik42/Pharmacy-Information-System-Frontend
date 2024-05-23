@@ -2,7 +2,7 @@ package ru.nsu.kondrenko.gui.view;
 
 import com.formdev.flatlaf.intellijthemes.FlatGrayIJTheme;
 import ru.nsu.kondrenko.gui.controller.fillers.*;
-import ru.nsu.kondrenko.gui.controller.options.*;
+import ru.nsu.kondrenko.gui.controller.queries.*;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.doctors.DoctorService;
 import ru.nsu.kondrenko.model.services.drug_types.DrugTypeService;

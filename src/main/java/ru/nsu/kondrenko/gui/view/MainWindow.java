@@ -1,6 +1,6 @@
 package ru.nsu.kondrenko.gui.view;
 
-import ru.nsu.kondrenko.gui.controller.options.*;
+import ru.nsu.kondrenko.gui.controller.queries.*;
 
 import javax.swing.*;
 import java.awt.*;

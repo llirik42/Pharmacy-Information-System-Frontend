@@ -1,10 +1,10 @@
-package ru.nsu.kondrenko.gui.controller.options;
+package ru.nsu.kondrenko.gui.controller.queries;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import ru.nsu.kondrenko.gui.controller.fillers.Filler;
 import ru.nsu.kondrenko.gui.view.View;
-import ru.nsu.kondrenko.model.dto.Drug;
+import ru.nsu.kondrenko.model.dto.StoredDrug;
 import ru.nsu.kondrenko.model.services.drugs.DrugService;
 import ru.nsu.kondrenko.model.services.drugs.exceptions.DrugServiceException;
 
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class DrugsController implements ActionListener {
+public class MinimalAmountDrugsController implements ActionListener {
     private final DrugService drugService;
 
     private final Filler filler;
@@ -28,11 +28,13 @@ public class DrugsController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            final List<Drug> drugs = drugService.getDrugs();
-            filler.fillTable(table, drugs.toArray());
+            final List<StoredDrug> minimalAmountDrugs = drugService.getMinimalAmountDrugs(
+                    null
+            );
+            filler.fillTable(table, minimalAmountDrugs.toArray());
 
-            if (drugs.isEmpty()) {
-                view.showInfo("Медикаменты не найдены");
+            if (minimalAmountDrugs.isEmpty()) {
+                view.showInfo("Медикаменты с минимальным запасом не найдены");
             }
         } catch (DrugServiceException ignored) {
             view.showNoConnectionError();

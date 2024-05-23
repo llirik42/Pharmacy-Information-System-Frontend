@@ -1,4 +1,4 @@
-package ru.nsu.kondrenko.gui.controller.options;
+package ru.nsu.kondrenko.gui.controller.queries;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class OrderedSomethingCustomersController implements ActionListener {
+public class WaitingSuppliesCustomersController implements ActionListener {
     private final CustomerService customerService;
 
     private final Filler filler;
@@ -28,16 +28,13 @@ public class OrderedSomethingCustomersController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            final List<Customer> orderedSomethingCustomers = customerService.getOrderedSomethingCustomers(
-                    null,
-                    null,
-                    null,
+            final List<Customer> waitingSuppliesCustomers = customerService.getWaitingSuppliesCustomers(
                     null
             );
-            filler.fillTable(table, orderedSomethingCustomers.toArray());
+            filler.fillTable(table, waitingSuppliesCustomers.toArray());
 
-            if (orderedSomethingCustomers.isEmpty()) {
-                view.showInfo("Клиенты, заказавшие медикаменты, не найдены");
+            if (waitingSuppliesCustomers.isEmpty()) {
+                view.showInfo("Клиенты, ожидающие поставки, не найдены");
             }
         } catch (CustomerServiceException ignored) {
             view.showNoConnectionError();

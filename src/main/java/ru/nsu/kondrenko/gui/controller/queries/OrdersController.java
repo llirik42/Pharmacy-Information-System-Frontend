@@ -1,4 +1,4 @@
-package ru.nsu.kondrenko.gui.controller.options;
+package ru.nsu.kondrenko.gui.controller.queries;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class ForgottenOrdersController implements ActionListener {
+public class OrdersController implements ActionListener {
     private final OrderService orderService;
 
     private final Filler filler;
@@ -28,11 +28,11 @@ public class ForgottenOrdersController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            final List<Order> forgottenOrders = orderService.getForgottenOrders();
-            filler.fillTable(table, forgottenOrders.toArray());
+            final List<Order> orders = orderService.getOrders();
+            filler.fillTable(table, orders.toArray());
 
-            if (forgottenOrders.isEmpty()) {
-                view.showInfo("Забытые заказы не найдены");
+            if (orders.isEmpty()) {
+                view.showInfo("Заказы не найдены");
             }
         } catch (OrderServiceException ignored) {
             view.showNoConnectionError();

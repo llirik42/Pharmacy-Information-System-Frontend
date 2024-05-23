@@ -1,10 +1,10 @@
-package ru.nsu.kondrenko.gui.controller.options;
+package ru.nsu.kondrenko.gui.controller.queries;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import ru.nsu.kondrenko.gui.controller.fillers.Filler;
 import ru.nsu.kondrenko.gui.view.View;
-import ru.nsu.kondrenko.model.dto.FrequentCustomer;
+import ru.nsu.kondrenko.model.dto.Customer;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.customers.exceptions.CustomerServiceException;
 
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class FrequentCustomersController implements ActionListener {
+public class OrderedSomethingCustomersController implements ActionListener {
     private final CustomerService customerService;
 
     private final Filler filler;
@@ -28,14 +28,16 @@ public class FrequentCustomersController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            final List<FrequentCustomer> frequentCustomers = customerService.getFrequentCustomers(
+            final List<Customer> orderedSomethingCustomers = customerService.getOrderedSomethingCustomers(
+                    null,
+                    null,
                     null,
                     null
             );
-            filler.fillTable(table, frequentCustomers.toArray());
+            filler.fillTable(table, orderedSomethingCustomers.toArray());
 
-            if (frequentCustomers.isEmpty()) {
-                view.showInfo("Постоянные клиенты не найдены");
+            if (orderedSomethingCustomers.isEmpty()) {
+                view.showInfo("Клиенты, заказавшие медикаменты, не найдены");
             }
         } catch (CustomerServiceException ignored) {
             view.showNoConnectionError();
