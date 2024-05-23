@@ -6,7 +6,7 @@ import ru.nsu.kondrenko.model.dto.FrequentCustomer;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class FrequentCustomerTableFiller implements TableFiller {
+public class FrequentCustomerFiller implements Filler {
     private static final String[] COLUMNS = {
             "№",
             "ФИО",

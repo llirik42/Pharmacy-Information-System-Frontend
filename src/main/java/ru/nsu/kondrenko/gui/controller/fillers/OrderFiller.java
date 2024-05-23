@@ -7,9 +7,9 @@ import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class OrderTableFiller implements TableFiller {
+public class OrderFiller implements Filler {
     private static final String[] COLUMNS = {
-            "Идентификатор",
+            "Номер заказа",
             "Дата регистрации",
             "Назначенная дата получения",
             "Дата получения",

@@ -2,7 +2,7 @@ package ru.nsu.kondrenko.gui.controller.options;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import ru.nsu.kondrenko.gui.controller.fillers.TableFiller;
+import ru.nsu.kondrenko.gui.controller.fillers.Filler;
 import ru.nsu.kondrenko.gui.view.View;
 import ru.nsu.kondrenko.model.dto.Order;
 import ru.nsu.kondrenko.model.services.orders.OrderService;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ForgottenOrdersController implements ActionListener {
     private final OrderService orderService;
 
-    private final TableFiller filler;
+    private final Filler filler;
 
     @Setter
     private View view;

@@ -2,7 +2,7 @@ package ru.nsu.kondrenko.gui.controller.options;
 
 import lombok.Setter;
 import org.jdesktop.swingx.JXDatePicker;
-import ru.nsu.kondrenko.gui.controller.fillers.TableFiller;
+import ru.nsu.kondrenko.gui.controller.fillers.Filler;
 import ru.nsu.kondrenko.gui.view.Utils;
 import ru.nsu.kondrenko.gui.view.View;
 import ru.nsu.kondrenko.model.dto.UsedDrug;
@@ -10,7 +10,6 @@ import ru.nsu.kondrenko.model.services.drugs.DrugService;
 import ru.nsu.kondrenko.model.services.drugs.exceptions.DrugServiceException;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -20,7 +19,7 @@ import java.util.List;
 public class UsedDrugsController implements ActionListener {
     private final DrugService drugService;
 
-    private final TableFiller filler;
+    private final Filler filler;
 
     private final JPanel dialogPanel;
 
@@ -33,7 +32,7 @@ public class UsedDrugsController implements ActionListener {
     @Setter
     private JTable table;
 
-    public UsedDrugsController(DrugService drugService, TableFiller filler) {
+    public UsedDrugsController(DrugService drugService, Filler filler) {
         this.drugService = drugService;
         this.filler = filler;
         startDatePicker = createDatePicker();

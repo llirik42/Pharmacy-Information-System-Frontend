@@ -1,16 +1,16 @@
 package ru.nsu.kondrenko.gui.controller.fillers;
 
-import ru.nsu.kondrenko.model.dto.Customer;
+import ru.nsu.kondrenko.model.dto.Technology;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class CustomerTableFiller implements TableFiller {
+public class TechnologyFiller implements Filler {
     private static final String[] COLUMNS = {
             "№",
-            "ФИО",
-            "Номер телефона",
-            "Адрес",
+            "Лекарство",
+            "Время приготовления",
+            "Количество"
     };
 
     @Override
@@ -18,11 +18,11 @@ public class CustomerTableFiller implements TableFiller {
         final Object[][] data = new Object[objects.length][COLUMNS.length];
 
         for (int i = 0; i < objects.length; i++) {
-            final Customer customer = (Customer) objects[i];
+            final Technology technology = (Technology) objects[i];
             data[i][0] = i + 1;
-            data[i][1] = customer.getFullName();
-            data[i][2] = customer.getPhoneNumber();
-            data[i][3] = customer.getAddress();
+            data[i][1] = technology.getDrug().getName();
+            data[i][2] = technology.getCookingTime();
+            data[i][3] = technology.getAmount();
         }
 
         table.setModel(new DefaultTableModel(data, COLUMNS));

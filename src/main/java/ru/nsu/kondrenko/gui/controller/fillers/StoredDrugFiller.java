@@ -6,7 +6,7 @@ import ru.nsu.kondrenko.model.dto.StoredDrug;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class StoredDrugTableFiller implements TableFiller {
+public class StoredDrugFiller implements Filler {
     private static final String[] COLUMNS = {
             "№",
             "Название",

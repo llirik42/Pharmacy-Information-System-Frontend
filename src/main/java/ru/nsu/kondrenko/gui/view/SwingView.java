@@ -30,14 +30,14 @@ public class SwingView implements View {
             TechnologyService technologyService) {
         FlatGrayIJTheme.setup();
 
-        final TableFiller orderFiller = new OrderTableFiller();
-        final TableFiller drugFiller = new DrugTableFiller();
-        final TableFiller customerFiller = new CustomerTableFiller();
-        final TableFiller frequentCustomerFiller = new FrequentCustomerTableFiller();
-        final TableFiller usedDrugFiller = new UsedDrugTableFiller();
-        final TableFiller technologyFiller = new TechnologyTableFiller();
-        final TableFiller storedDrugFiller = new StoredDrugTableFiller();
-        final TableFiller productionComponentFiller = new ProductionComponentTableFiller();
+        final Filler orderFiller = new OrderFiller();
+        final Filler drugFiller = new DrugFiller();
+        final Filler customerFiller = new CustomerFiller();
+        final Filler frequentCustomerFiller = new FrequentCustomerFiller();
+        final Filler usedDrugFiller = new UsedDrugFiller();
+        final Filler technologyFiller = new TechnologyFiller();
+        final Filler storedDrugFiller = new StoredDrugFiller();
+        final Filler productionComponentFiller = new ProductionComponentFiller();
 
         final CreateOrderController createOrderController = new CreateOrderController(
                 orderService

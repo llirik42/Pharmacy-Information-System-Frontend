@@ -2,7 +2,7 @@ package ru.nsu.kondrenko.gui.controller.options;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import ru.nsu.kondrenko.gui.controller.fillers.TableFiller;
+import ru.nsu.kondrenko.gui.controller.fillers.Filler;
 import ru.nsu.kondrenko.gui.view.View;
 import ru.nsu.kondrenko.model.dto.Drug;
 import ru.nsu.kondrenko.model.services.drugs.DrugService;
@@ -17,7 +17,7 @@ import java.util.List;
 public class CriticalAmountDrugsController implements ActionListener {
     private final DrugService drugService;
 
-    private final TableFiller filler;
+    private final Filler filler;
 
     @Setter
     private View view;
