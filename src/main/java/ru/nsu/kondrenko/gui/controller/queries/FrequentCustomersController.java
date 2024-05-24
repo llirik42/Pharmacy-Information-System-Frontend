@@ -30,7 +30,7 @@ public class FrequentCustomersController extends QueryController {
         drugComboBox = new DrugComboBox();
         drugTypeComboBox = new DrugTypeComboBox();
         dialogPanel = Utils.createDialogPanel(2);
-        Utils.addComponentToPanel(dialogPanel, "Лекарство", drugTypeComboBox);
+        Utils.addComponentToPanel(dialogPanel, "Лекарство", drugComboBox);
         Utils.addComponentToPanel(dialogPanel, "Тип лекарства", drugTypeComboBox);
     }
 
@@ -48,7 +48,7 @@ public class FrequentCustomersController extends QueryController {
         final DrugType drugType = drugTypeComboBox.getSelectedDrugType();
 
         return customerService.getFrequentCustomers(
-                drug != null ? drugType.getId() : null,
+                drug != null ? drug.getId() : null,
                 drugType != null ? drugType.getId() : null
         );
     }

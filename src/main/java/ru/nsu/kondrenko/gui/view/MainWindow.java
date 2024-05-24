@@ -45,8 +45,7 @@ public class MainWindow extends Window {
                 technologiesController
         );
 
-        final JScrollPane scrollPane = new JScrollPane(optionsPanel);
-        add(scrollPane, BorderLayout.WEST);
+        add(optionsPanel, BorderLayout.WEST);
 
         final CentralPanel centralPanel = new CentralPanel();
         add(centralPanel, BorderLayout.CENTER);
@@ -66,6 +65,8 @@ public class MainWindow extends Window {
         ordersController.setTable(table);
         technologiesController.setTable(table);
         drugsController.setTable(table);
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         pack();
     }

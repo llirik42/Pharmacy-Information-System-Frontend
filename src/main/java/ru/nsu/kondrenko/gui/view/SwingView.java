@@ -102,7 +102,7 @@ public class SwingView implements View {
         );
         final CriticalAmountDrugsController criticalAmountDrugsController = new CriticalAmountDrugsController(
                 drugFiller,
-                "Медикаменты с минимальным запасом",
+                "Медикаменты с критической нормой/закончившиеся",
                 drugService
         );
         final ProductionComponentsController productionComponentsController = new ProductionComponentsController(
