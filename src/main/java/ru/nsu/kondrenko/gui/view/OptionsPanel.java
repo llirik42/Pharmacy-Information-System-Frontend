@@ -35,11 +35,11 @@ public class OptionsPanel extends JPanel {
         add(new Option("Клиенты, ожидающие поставки", waitingCustomersListener));
         add(new Option("Часто делающие заказы клиенты", frequentCustomersListener));
         add(new Option("Клиенты, заказавшие медикаменты", orderedSomethingCustomersListener));
-        add(new Option("Популярные медикаменты", popularDrugsListener));
+        add(new Option("Часто используемые медикаменты", popularDrugsListener));
         add(new Option("Использованные медикаменты", usedDrugsListener));
         add(new Option("Медикаменты с критической нормой/закончившиеся", criticalAmountDrugsListener));
         add(new Option("Требуемые для производства медикаменты", productionComponentsListener));
         add(new Option("Медикаменты с минимальным запасом", minimalAmountDrugsListener));
-        add(new Option("Все технологии", technologiesListener));
+        add(new Option("Технологии", technologiesListener));
     }
 }
