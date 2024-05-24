@@ -30,7 +30,7 @@ public class OptionsPanel extends JPanel {
         add(new Option("Все заказы", ordersListener));
         add(new Option("Информация о медикаменте", null));
         add(new Option("Все медикаменты", drugsListener));
-        add(new Option("Забытые заказы", forgottenOrdersListener));
+        add(new Option("Не забранные вовремя заказы", forgottenOrdersListener));
         add(new Option("Заказы в производстве", productionOrdersListener));
         add(new Option("Клиенты, ожидающие поставки", waitingCustomersListener));
         add(new Option("Постоянные клиенты", frequentCustomersListener));

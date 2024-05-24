@@ -1,44 +1,55 @@
 package ru.nsu.kondrenko.gui.controller.queries;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import ru.nsu.kondrenko.gui.controller.choosers.DrugComboBox;
+import ru.nsu.kondrenko.gui.controller.choosers.DrugTypeComboBox;
 import ru.nsu.kondrenko.gui.controller.fillers.Filler;
-import ru.nsu.kondrenko.gui.view.View;
-import ru.nsu.kondrenko.model.dto.FrequentCustomer;
+import ru.nsu.kondrenko.gui.view.Utils;
+import ru.nsu.kondrenko.model.dto.Drug;
+import ru.nsu.kondrenko.model.dto.DrugType;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
-import ru.nsu.kondrenko.model.services.customers.exceptions.CustomerServiceException;
+import ru.nsu.kondrenko.model.services.drug_types.DrugTypeService;
+import ru.nsu.kondrenko.model.services.drugs.DrugService;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
-@RequiredArgsConstructor
-public class FrequentCustomersController implements ActionListener {
+public class FrequentCustomersController extends QueryController {
     private final CustomerService customerService;
+    private final DrugService drugService;
+    private final DrugTypeService drugTypeService;
 
-    private final Filler filler;
+    private final DrugComboBox drugComboBox;
+    private final DrugTypeComboBox drugTypeComboBox;
+    private final JPanel dialogPanel;
 
-    @Setter
-    private View view;
-
-    @Setter
-    private JTable table;
+    public FrequentCustomersController(Filler filler, String queryName, CustomerService customerService, DrugService drugService, DrugTypeService drugTypeService) {
+        super(filler, queryName);
+        this.customerService = customerService;
+        this.drugService = drugService;
+        this.drugTypeService = drugTypeService;
+        drugComboBox = new DrugComboBox();
+        drugTypeComboBox = new DrugTypeComboBox();
+        dialogPanel = Utils.createDialogPanel(2);
+        Utils.addComponentToPanel(dialogPanel, "Лекарство", drugTypeComboBox);
+        Utils.addComponentToPanel(dialogPanel, "Тип лекарства", drugTypeComboBox);
+    }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        try {
-            final List<FrequentCustomer> frequentCustomers = customerService.getFrequentCustomers(
-                    null,
-                    null
-            );
-            filler.fillTable(table, frequentCustomers.toArray());
+    protected List<?> getResult() throws Exception {
+        drugComboBox.setDrugList(drugService.getDrugs());
+        drugTypeComboBox.setDrugTypeList(drugTypeService.getDrugTypes());
 
-            if (frequentCustomers.isEmpty()) {
-                view.showInfo("Постоянные клиенты не найдены");
-            }
-        } catch (CustomerServiceException ignored) {
-            view.showNoConnectionError();
+        final boolean ok = getView().showConfirmationDialog("Данные для поиска", dialogPanel);
+        if (!ok) {
+            return null;
         }
+
+        final Drug drug = drugComboBox.getSelectedDrug();
+        final DrugType drugType = drugTypeComboBox.getSelectedDrugType();
+
+        return customerService.getFrequentCustomers(
+                drug != null ? drugType.getId() : null,
+                drugType != null ? drugType.getId() : null
+        );
     }
 }

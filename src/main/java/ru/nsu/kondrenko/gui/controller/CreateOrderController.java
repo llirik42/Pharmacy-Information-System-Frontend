@@ -1,4 +1,4 @@
-package ru.nsu.kondrenko.gui.controller.queries;
+package ru.nsu.kondrenko.gui.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

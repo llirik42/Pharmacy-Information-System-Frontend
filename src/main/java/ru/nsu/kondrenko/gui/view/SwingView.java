@@ -1,6 +1,9 @@
 package ru.nsu.kondrenko.gui.view;
 
 import com.formdev.flatlaf.intellijthemes.FlatGrayIJTheme;
+import ru.nsu.kondrenko.gui.controller.CreateOrderController;
+import ru.nsu.kondrenko.gui.controller.ObtainOrderController;
+import ru.nsu.kondrenko.gui.controller.PayOrderController;
 import ru.nsu.kondrenko.gui.controller.fillers.*;
 import ru.nsu.kondrenko.gui.controller.queries.*;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
@@ -49,52 +52,69 @@ public class SwingView implements View {
                 orderService
         );
         final DrugsController drugsController = new DrugsController(
-                drugService,
-                drugFiller
+                drugFiller,
+                "Медикаменты",
+                drugService
         );
         final OrdersController ordersController = new OrdersController(
-                orderService,
-                orderFiller
+                orderFiller,
+                "Заказы",
+                orderService
         );
         final ForgottenOrdersController forgottenOrdersController = new ForgottenOrdersController(
-                orderService,
-                orderFiller
+                orderFiller,
+                "Не забранные вовремя заказы",
+                orderService
         );
         final ProductionOrdersController productionOrdersController = new ProductionOrdersController(
-                orderService,
-                orderFiller
+                orderFiller,
+                "Заказы в производстве",
+                orderService
         );
         final WaitingSuppliesCustomersController waitingCustomersController = new WaitingSuppliesCustomersController(
+                customerFiller,
+                "Ожидающие поставок клиенты",
                 customerService,
-                customerFiller
+                drugTypeService
         );
         final FrequentCustomersController frequentCustomersController = new FrequentCustomersController(
+                frequentCustomerFiller,
+                "Часто делающие заказы клиенты",
                 customerService,
-                frequentCustomerFiller
+                drugService,
+                drugTypeService
         );
         final OrderedSomethingCustomersController orderedSomethingCustomersController = new OrderedSomethingCustomersController(
+                customerFiller,
+                "Клиенты, заказавшие медикаменты",
                 customerService,
-                customerFiller
+                drugService,
+                drugTypeService
         );
         final PopularDrugsController popularDrugsController = new PopularDrugsController(
                 drugService,
                 usedDrugFiller
         );
         final UsedDrugsController usedDrugsController = new UsedDrugsController(
-                drugService,
-                usedDrugFiller
+                usedDrugFiller,
+                "Использованные медикаменты",
+                drugService
         );
         final CriticalAmountDrugsController criticalAmountDrugsController = new CriticalAmountDrugsController(
-                drugService,
-                drugFiller
+                drugFiller,
+                "Медикаменты с минимальным запасом",
+                drugService
         );
         final ProductionComponentsController productionComponentsController = new ProductionComponentsController(
-                productionService,
-                productionComponentFiller
+                productionComponentFiller,
+                "Требуемые для производства медикаменты",
+                productionService
         );
         final MinimalAmountDrugsController minimalAmountDrugsController = new MinimalAmountDrugsController(
+                storedDrugFiller,
+                "Медикаменты с минимальным запасом",
                 drugService,
-                storedDrugFiller
+                drugTypeService
         );
         final TechnologiesController technologiesController = new TechnologiesController(
                 technologyService,
@@ -148,11 +168,6 @@ public class SwingView implements View {
     @Override
     public void showNoConnectionError() {
         showError(Constants.NO_CONNECTION_ERROR_MESSAGE);
-    }
-
-    @Override
-    public void showEmptyResultInfo() {
-        showInfo("Ничего не найдено");
     }
 
     @Override

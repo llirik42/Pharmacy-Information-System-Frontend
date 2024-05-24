@@ -1,5 +1,8 @@
 package ru.nsu.kondrenko.gui.view;
 
+import ru.nsu.kondrenko.gui.controller.CreateOrderController;
+import ru.nsu.kondrenko.gui.controller.ObtainOrderController;
+import ru.nsu.kondrenko.gui.controller.PayOrderController;
 import ru.nsu.kondrenko.gui.controller.queries.*;
 
 import javax.swing.*;

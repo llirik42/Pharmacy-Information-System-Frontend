@@ -11,7 +11,5 @@ public interface View {
 
     void showNoConnectionError();
 
-    void showEmptyResultInfo();
-
     boolean showConfirmationDialog(String title, JPanel content);
 }

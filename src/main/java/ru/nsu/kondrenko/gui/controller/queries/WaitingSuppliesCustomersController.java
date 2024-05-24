@@ -1,43 +1,44 @@
 package ru.nsu.kondrenko.gui.controller.queries;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import ru.nsu.kondrenko.gui.controller.choosers.DrugTypeComboBox;
 import ru.nsu.kondrenko.gui.controller.fillers.Filler;
-import ru.nsu.kondrenko.gui.view.View;
-import ru.nsu.kondrenko.model.dto.Customer;
+import ru.nsu.kondrenko.gui.view.Utils;
+import ru.nsu.kondrenko.model.dto.DrugType;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
-import ru.nsu.kondrenko.model.services.customers.exceptions.CustomerServiceException;
+import ru.nsu.kondrenko.model.services.drug_types.DrugTypeService;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
-@RequiredArgsConstructor
-public class WaitingSuppliesCustomersController implements ActionListener {
+public class WaitingSuppliesCustomersController extends QueryController {
     private final CustomerService customerService;
+    private final DrugTypeService drugTypeService;
 
-    private final Filler filler;
+    private final DrugTypeComboBox drugTypeComboBox;
+    private final JPanel dialogPanel;
 
-    @Setter
-    private View view;
-
-    @Setter
-    private JTable table;
+    public WaitingSuppliesCustomersController(Filler filler, String queryName, CustomerService customerService, DrugTypeService drugTypeService) {
+        super(filler, queryName);
+        this.customerService = customerService;
+        this.drugTypeService = drugTypeService;
+        drugTypeComboBox = new DrugTypeComboBox();
+        dialogPanel = Utils.createDialogPanel(1);
+        Utils.addComponentToPanel(dialogPanel, "Тип лекарства", drugTypeComboBox);
+    }
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        try {
-            final List<Customer> waitingSuppliesCustomers = customerService.getWaitingSuppliesCustomers(
-                    null
-            );
-            filler.fillTable(table, waitingSuppliesCustomers.toArray());
+    protected List<?> getResult() throws Exception {
+        drugTypeComboBox.setDrugTypeList(drugTypeService.getDrugTypes());
 
-            if (waitingSuppliesCustomers.isEmpty()) {
-                view.showInfo("Клиенты, ожидающие поставки, не найдены");
-            }
-        } catch (CustomerServiceException ignored) {
-            view.showNoConnectionError();
+        final boolean ok = getView().showConfirmationDialog("Данные для поиска", dialogPanel);
+        if (!ok) {
+            return null;
         }
+
+        final DrugType drugType = drugTypeComboBox.getSelectedDrugType();
+
+        return customerService.getWaitingSuppliesCustomers(
+                drugType != null ? drugType.getId() : null
+        );
     }
 }
