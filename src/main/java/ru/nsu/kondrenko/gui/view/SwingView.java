@@ -94,7 +94,8 @@ public class SwingView implements View {
         final PopularDrugsController popularDrugsController = new PopularDrugsController(
                 usedDrugFiller,
                 "Часто используемые медикаменты",
-                drugService
+                drugService,
+                drugTypeService
         );
         final UsedDrugsController usedDrugsController = new UsedDrugsController(
                 usedDrugFiller,
@@ -120,7 +121,9 @@ public class SwingView implements View {
         final TechnologiesController technologiesController = new TechnologiesController(
                 technologyFiller,
                 "Технологии",
-                technologyService
+                technologyService,
+                drugService,
+                drugTypeService
         );
 
         createOrderController.setView(this);
