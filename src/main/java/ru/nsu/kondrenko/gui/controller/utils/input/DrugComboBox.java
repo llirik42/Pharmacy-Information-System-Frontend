@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrugComboBox extends JComboBox<String> {
-    private boolean allowEmpty;
+    private final boolean allowEmpty;
 
     private List<Drug> drugs;
 
