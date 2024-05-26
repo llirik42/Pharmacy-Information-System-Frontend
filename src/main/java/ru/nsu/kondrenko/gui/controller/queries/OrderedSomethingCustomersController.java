@@ -1,17 +1,16 @@
 package ru.nsu.kondrenko.gui.controller.queries;
 
-import ru.nsu.kondrenko.gui.controller.choosers.DatePicker;
-import ru.nsu.kondrenko.gui.controller.choosers.DrugComboBox;
-import ru.nsu.kondrenko.gui.controller.choosers.DrugTypeComboBox;
+import ru.nsu.kondrenko.gui.controller.utils.DatePicker;
+import ru.nsu.kondrenko.gui.controller.utils.DialogPanel;
+import ru.nsu.kondrenko.gui.controller.utils.DrugComboBox;
+import ru.nsu.kondrenko.gui.controller.utils.DrugTypeComboBox;
 import ru.nsu.kondrenko.gui.controller.fillers.Filler;
-import ru.nsu.kondrenko.gui.view.Utils;
 import ru.nsu.kondrenko.model.dto.Drug;
 import ru.nsu.kondrenko.model.dto.DrugType;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.drug_types.DrugTypeService;
 import ru.nsu.kondrenko.model.services.drugs.DrugService;
 
-import javax.swing.*;
 import java.util.List;
 
 public class OrderedSomethingCustomersController extends QueryController {
@@ -23,22 +22,23 @@ public class OrderedSomethingCustomersController extends QueryController {
     private final DatePicker endDatePicker;
     private final DrugComboBox drugComboBox;
     private final DrugTypeComboBox drugTypeComboBox;
-    private final JPanel dialogPanel;
+    private final DialogPanel dialogPanel;
 
     public OrderedSomethingCustomersController(Filler filler, String queryName, CustomerService customerService, DrugService drugService, DrugTypeService drugTypeService) {
         super(filler, queryName);
         this.customerService = customerService;
         this.drugService = drugService;
         this.drugTypeService = drugTypeService;
+
         startDatePicker = new DatePicker();
         endDatePicker = new DatePicker();
         drugComboBox = new DrugComboBox();
         drugTypeComboBox = new DrugTypeComboBox();
-        dialogPanel = Utils.createDialogPanel(4);
-        Utils.addComponentToPanel(dialogPanel, "Начало", startDatePicker);
-        Utils.addComponentToPanel(dialogPanel, "Конец", endDatePicker);
-        Utils.addComponentToPanel(dialogPanel, "Лекарство", drugComboBox);
-        Utils.addComponentToPanel(dialogPanel, "Тип лекарства", drugTypeComboBox);
+        dialogPanel = new DialogPanel(4);
+        dialogPanel.addComponent("Начало", startDatePicker);
+        dialogPanel.addComponent("Конец", endDatePicker);
+        dialogPanel.addComponent("Лекарство", drugComboBox);
+        dialogPanel.addComponent("Тип лекарства", drugTypeComboBox);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ru.nsu.kondrenko.gui.controller.choosers;
+package ru.nsu.kondrenko.gui.controller.utils;
 
 import ru.nsu.kondrenko.model.dto.Drug;
 

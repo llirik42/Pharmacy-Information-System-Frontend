@@ -1,13 +1,12 @@
 package ru.nsu.kondrenko.gui.controller.queries;
 
-import ru.nsu.kondrenko.gui.controller.choosers.DrugTypeComboBox;
+import ru.nsu.kondrenko.gui.controller.utils.DialogPanel;
+import ru.nsu.kondrenko.gui.controller.utils.DrugTypeComboBox;
 import ru.nsu.kondrenko.gui.controller.fillers.Filler;
-import ru.nsu.kondrenko.gui.view.Utils;
 import ru.nsu.kondrenko.model.dto.DrugType;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.drug_types.DrugTypeService;
 
-import javax.swing.*;
 import java.util.List;
 
 public class WaitingSuppliesCustomersController extends QueryController {
@@ -15,15 +14,16 @@ public class WaitingSuppliesCustomersController extends QueryController {
     private final DrugTypeService drugTypeService;
 
     private final DrugTypeComboBox drugTypeComboBox;
-    private final JPanel dialogPanel;
+    private final DialogPanel dialogPanel;
 
     public WaitingSuppliesCustomersController(Filler filler, String queryName, CustomerService customerService, DrugTypeService drugTypeService) {
         super(filler, queryName);
         this.customerService = customerService;
         this.drugTypeService = drugTypeService;
+
         drugTypeComboBox = new DrugTypeComboBox();
-        dialogPanel = Utils.createDialogPanel(1);
-        Utils.addComponentToPanel(dialogPanel, "Тип лекарства", drugTypeComboBox);
+        dialogPanel = new DialogPanel(1);
+        dialogPanel.addComponent("Тип лекарства", drugTypeComboBox);
     }
 
     @Override
