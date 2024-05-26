@@ -2,6 +2,7 @@ package ru.nsu.kondrenko.gui;
 
 import ru.nsu.kondrenko.gui.view.SwingView;
 import ru.nsu.kondrenko.gui.view.View;
+import ru.nsu.kondrenko.model.Context;
 import ru.nsu.kondrenko.model.services.ServiceConfig;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.customers.impl.CustomerServiceImpl;
@@ -40,7 +41,10 @@ public class Main {
         final ProductionService productionService = new ProductionServiceImpl(config);
         final TechnologyService technologyService = new TechnologyServiceImpl(config);
 
+        final Context context = new Context();
+
         final View view = new SwingView(
+                context,
                 customerService,
                 doctorService,
                 drugTypeService,

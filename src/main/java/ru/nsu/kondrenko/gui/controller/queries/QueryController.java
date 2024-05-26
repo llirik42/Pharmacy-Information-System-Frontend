@@ -1,30 +1,22 @@
 package ru.nsu.kondrenko.gui.controller.queries;
 
-import lombok.Getter;
 import lombok.Setter;
+import ru.nsu.kondrenko.gui.controller.OptionController;
 import ru.nsu.kondrenko.gui.controller.fillers.Filler;
-import ru.nsu.kondrenko.gui.view.View;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
-public abstract class QueryController implements ActionListener {
+public abstract class QueryController extends OptionController {
     private final Filler filler;
-
-    private final String queryName;
-
-    @Getter
-    @Setter
-    private View view;
 
     @Setter
     private JTable table;
 
     public QueryController(Filler filler, String queryName) {
+        super(queryName);
         this.filler = filler;
-        this.queryName = queryName;
     }
 
     @Override
@@ -36,21 +28,22 @@ public abstract class QueryController implements ActionListener {
                 fillTable(result);
             }
         } catch (Exception exception) {
-            view.showNoConnectionError();
+            getView().showNoConnectionError();
         }
     }
 
     protected abstract List<?> getResult() throws Exception;
 
     protected String getNotFoundMessage() {
-        return String.format("%s не найдены", queryName);
+        return String.format("%s не найдены", getOptionName());
     }
 
     private void fillTable(List<?> result) {
         filler.fillTable(table, result.toArray());
+        super.actionPerformed(null);
 
         if (result.isEmpty()) {
-            view.showInfo(getNotFoundMessage());
+            getView().showInfo(getNotFoundMessage());
         }
     }
 }

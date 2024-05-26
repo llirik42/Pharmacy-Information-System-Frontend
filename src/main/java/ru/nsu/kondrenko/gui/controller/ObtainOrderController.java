@@ -10,9 +10,8 @@ import ru.nsu.kondrenko.model.services.orders.response.OrderObtainStatus;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class ObtainOrderController implements ActionListener {
+public class ObtainOrderController extends OptionController {
     private final OrderService orderService;
 
     private final JTextField orderIdField;
@@ -21,9 +20,9 @@ public class ObtainOrderController implements ActionListener {
     @Setter
     private View view;
 
-    public ObtainOrderController(OrderService orderService) {
+    public ObtainOrderController(String optionName, OrderService orderService) {
+        super(optionName);
         this.orderService = orderService;
-
         orderIdField = new JTextField();
         dialogPanel = new DialogPanel(1);
         dialogPanel.addComponent("Номер заказа", orderIdField);

@@ -11,6 +11,8 @@ import static javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS;
 public class CentralPanel extends JPanel {
     private final JTable table;
 
+    private final JLabel titleLabel;
+
     public CentralPanel() {
         table = new JTable();
         table.setDefaultEditor(Object.class, null);
@@ -26,6 +28,10 @@ public class CentralPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
+        titleLabel = new JLabel("", SwingConstants.CENTER);
+        titleLabel.setFont(new Font(Constants.FONT_FAMILY, Font.PLAIN, 16));
+
         add(scrollPane, BorderLayout.CENTER);
+        add(titleLabel, BorderLayout.NORTH);
     }
 }

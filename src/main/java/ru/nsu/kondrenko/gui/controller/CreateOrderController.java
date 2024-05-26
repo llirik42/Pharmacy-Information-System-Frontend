@@ -1,22 +1,19 @@
 package ru.nsu.kondrenko.gui.controller;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import ru.nsu.kondrenko.gui.view.View;
 import ru.nsu.kondrenko.model.services.orders.OrderService;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-@RequiredArgsConstructor
-public class CreateOrderController implements ActionListener {
+public class CreateOrderController extends OptionController {
     private final OrderService orderService;
 
-    @Setter
-    private View view;
+    public CreateOrderController(String optionName, OrderService orderService) {
+        super(optionName);
+        this.orderService = orderService;
+    }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-
+        super.actionPerformed(actionEvent);
     }
 }

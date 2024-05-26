@@ -8,6 +8,8 @@ import ru.nsu.kondrenko.model.dto.FrequentCustomer;
 import ru.nsu.kondrenko.model.services.ServiceConfig;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.customers.exceptions.CustomerServiceException;
+import ru.nsu.kondrenko.model.services.customers.requests.CustomerCreationRequest;
+import ru.nsu.kondrenko.model.services.customers.responses.CustomerCreationResponse;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +32,49 @@ public class CustomerServiceImpl implements CustomerService {
                 getCustomersUrl(),
                 "Fetching all customers failed"
         );
+    }
+
+    @Override
+    public Customer findCustomer(int customerId) throws CustomerServiceException {
+        final RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            return restTemplate.postForEntity(
+                    getCustomerSearchUrl(),
+                    null,
+                    Customer.class,
+                    customerId
+            ).getBody();
+        } catch (Exception exception) {
+            throw new CustomerServiceException("Searching of customer %s failed".formatted(customerId), exception);
+        }
+    }
+
+    @Override
+    public CustomerCreationResponse createCustomer(String fullName, String phoneNumber, String address) throws CustomerServiceException {
+        final RestTemplate restTemplate = new RestTemplate();
+
+        final CustomerCreationRequest request = new CustomerCreationRequest(
+                fullName,
+                phoneNumber,
+                address
+        );
+
+        try {
+            return restTemplate.postForEntity(
+                    getCustomersUrl(),
+                    request,
+                    CustomerCreationResponse.class
+            ).getBody();
+        } catch (Exception exception) {
+            throw new CustomerServiceException(
+                    "Creation of customer %s, %s, %s failed".formatted(
+                            fullName,
+                            phoneNumber,
+                            address),
+                    exception
+            );
+        }
     }
 
     @Override
@@ -155,5 +200,9 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return url;
+    }
+
+    private String getCustomerSearchUrl() {
+        return getCustomersUrl() + "/search";
     }
 }

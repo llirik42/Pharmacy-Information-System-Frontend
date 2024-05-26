@@ -10,9 +10,8 @@ import ru.nsu.kondrenko.model.services.orders.response.OrderPaymentStatus;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class PayOrderController implements ActionListener {
+public class PayOrderController extends OptionController {
     private final OrderService orderService;
 
     private final JTextField orderIdField;
@@ -21,9 +20,9 @@ public class PayOrderController implements ActionListener {
     @Setter
     private View view;
 
-    public PayOrderController(OrderService orderService) {
+    public PayOrderController(String optionName, OrderService orderService) {
+        super(optionName);
         this.orderService = orderService;
-
         orderIdField = new JTextField();
         dialogPanel = new DialogPanel(1);
         dialogPanel.addComponent("Номер заказа", orderIdField);
@@ -31,6 +30,8 @@ public class PayOrderController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        super.actionPerformed(actionEvent);
+
         final boolean ok = view.showConfirmationDialog("Данные заказа", dialogPanel);
         if (!ok) {
             return;
