@@ -37,6 +37,10 @@ public final class Utils {
     }
 
     public static String customerToString(Customer customer) {
+        if (customer == null) {
+            return "";
+        }
+
         return "%s, %s, %s".formatted(
                 customer.getFullName(),
                 customer.getPhoneNumber(),
