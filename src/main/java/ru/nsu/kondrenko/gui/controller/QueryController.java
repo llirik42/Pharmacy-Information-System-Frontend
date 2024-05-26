@@ -1,8 +1,7 @@
-package ru.nsu.kondrenko.gui.controller.queries;
+package ru.nsu.kondrenko.gui.controller;
 
 import lombok.Setter;
-import ru.nsu.kondrenko.gui.controller.OptionController;
-import ru.nsu.kondrenko.gui.controller.fillers.Filler;
+import ru.nsu.kondrenko.gui.controller.utils.fillers.Filler;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

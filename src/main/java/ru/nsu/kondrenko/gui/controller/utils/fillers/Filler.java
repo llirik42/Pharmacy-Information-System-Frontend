@@ -1,4 +1,4 @@
-package ru.nsu.kondrenko.gui.controller.fillers;
+package ru.nsu.kondrenko.gui.controller.utils.fillers;
 
 import javax.swing.*;
 

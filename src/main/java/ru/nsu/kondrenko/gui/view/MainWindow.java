@@ -1,11 +1,10 @@
 package ru.nsu.kondrenko.gui.view;
 
 import ru.nsu.kondrenko.gui.controller.OptionController;
-import ru.nsu.kondrenko.gui.controller.queries.*;
+import ru.nsu.kondrenko.gui.controller.QueryController;
 
 import javax.swing.*;
 import java.awt.*;
-
 import java.util.List;
 
 public class MainWindow extends Window {

@@ -1,7 +1,7 @@
 package ru.nsu.kondrenko.gui.view;
 
 import ru.nsu.kondrenko.gui.controller.OptionController;
-import ru.nsu.kondrenko.gui.controller.queries.QueryController;
+import ru.nsu.kondrenko.gui.controller.QueryController;
 
 import javax.swing.*;
 import java.awt.*;

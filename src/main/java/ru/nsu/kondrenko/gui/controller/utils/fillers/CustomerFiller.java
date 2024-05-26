@@ -1,16 +1,14 @@
-package ru.nsu.kondrenko.gui.controller.fillers;
+package ru.nsu.kondrenko.gui.controller.utils.fillers;
 
 import ru.nsu.kondrenko.model.dto.Customer;
-import ru.nsu.kondrenko.model.dto.FrequentCustomer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class FrequentCustomerFiller implements Filler {
+public class CustomerFiller implements Filler {
     private static final String[] COLUMNS = {
             "№",
             "ФИО",
-            "Кол-во заказов",
             "Номер телефона",
             "Адрес",
     };
@@ -20,13 +18,11 @@ public class FrequentCustomerFiller implements Filler {
         final Object[][] data = new Object[objects.length][COLUMNS.length];
 
         for (int i = 0; i < objects.length; i++) {
-            final FrequentCustomer frequentCustomer = (FrequentCustomer) objects[i];
-            final Customer customer = frequentCustomer.getCustomer();
+            final Customer customer = (Customer) objects[i];
             data[i][0] = i + 1;
             data[i][1] = customer.getFullName();
-            data[i][2] = frequentCustomer.getOrderCount();
-            data[i][3] = customer.getPhoneNumber();
-            data[i][4] = customer.getAddress();
+            data[i][2] = customer.getPhoneNumber();
+            data[i][3] = customer.getAddress();
         }
 
         table.setModel(new DefaultTableModel(data, COLUMNS));

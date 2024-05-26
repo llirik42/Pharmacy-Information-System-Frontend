@@ -1,4 +1,4 @@
-package ru.nsu.kondrenko.gui.controller.utils;
+package ru.nsu.kondrenko.gui.controller.utils.input;
 
 import org.jdesktop.swingx.JXDatePicker;
 

@@ -1,8 +1,9 @@
 package ru.nsu.kondrenko.gui.controller.queries;
 
-import ru.nsu.kondrenko.gui.controller.utils.DatePicker;
-import ru.nsu.kondrenko.gui.controller.fillers.Filler;
-import ru.nsu.kondrenko.gui.controller.utils.DialogPanel;
+import ru.nsu.kondrenko.gui.controller.QueryController;
+import ru.nsu.kondrenko.gui.controller.utils.fillers.Filler;
+import ru.nsu.kondrenko.gui.controller.utils.input.DatePicker;
+import ru.nsu.kondrenko.gui.controller.utils.input.DialogPanel;
 import ru.nsu.kondrenko.model.services.drugs.DrugService;
 
 import java.util.List;
