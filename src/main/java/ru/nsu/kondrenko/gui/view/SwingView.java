@@ -11,6 +11,7 @@ import ru.nsu.kondrenko.gui.controller.utils.fillers.*;
 import ru.nsu.kondrenko.gui.view.central.*;
 import ru.nsu.kondrenko.gui.view.west.OptionsPanel;
 import ru.nsu.kondrenko.model.Context;
+import ru.nsu.kondrenko.model.services.administration_routes.AdministrationRouteService;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.doctors.DoctorService;
 import ru.nsu.kondrenko.model.services.drug_types.DrugTypeService;
@@ -30,8 +31,6 @@ public class SwingView implements View {
 
     private final MainWindow mainWindow;
 
-
-
     public SwingView(
             Context context,
             CustomerService customerService,
@@ -42,7 +41,8 @@ public class SwingView implements View {
             PatientService patientService,
             PrescriptionService prescriptionService,
             ProductionService productionService,
-            TechnologyService technologyService) {
+            TechnologyService technologyService,
+            AdministrationRouteService administrationRouteService) {
         FlatGrayIJTheme.setup();
 
         final Filler orderFiller = new OrderFiller();
@@ -63,13 +63,20 @@ public class SwingView implements View {
                 orderService
         );
         final ConfirmOrderCreationController confirmOrderCreationController = new ConfirmOrderCreationController(
-                orderService
+                orderService,
+                customerService,
+                doctorService,
+                patientService,
+                prescriptionService
+        );
+        final CreateOrderController createOrderController =  new CreateOrderController(
+                "Оформление заказа",
+                drugService,
+                administrationRouteService
         );
 
         final List<OptionController> optionControllers = List.of(
-                new CreateOrderController(
-                        "Оформление заказа"
-                ),
+                createOrderController,
                 new PayOrderController(
                         "Оплата заказа",
                         orderService
@@ -174,7 +181,7 @@ public class SwingView implements View {
 
         final JPanel optionsPanel = new OptionsPanel(optionControllers, queryControllers);
 
-        centralPanel = new CentralPanel();
+        centralPanel = new CentralPanel(confirmOrderCreationController);
         final QueryResultPanel queryResultPanel = centralPanel.getQueryResultPanel();
         final DrugInfoPanel drugInfoPanel = centralPanel.getDrugInfoPanel();
         final OrderInfoPanel orderInfoPanel = centralPanel.getOrderInfoPanel();
@@ -184,6 +191,7 @@ public class SwingView implements View {
         drugInfoController.setDrugInfoPanel(drugInfoPanel);
         orderInfoController.setOrderInfoPanel(orderInfoPanel);
         confirmOrderCreationController.setOrderCreationForm(orderCreationForm);
+        createOrderController.setOrderCreationForm(orderCreationForm);
 
         for (final var it : optionControllers) {
             it.setTitleLabel(queryNameLabel);

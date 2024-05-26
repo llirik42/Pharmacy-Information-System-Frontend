@@ -20,16 +20,17 @@ public final class Utils {
         return attributeTitleLabel;
     }
 
-    public static JPanel createAttributePanel(String attributeTitle, JLabel attributeValueLabel) {
+    public static JPanel create2ComponentPanel(Component c1, Component c2) {
         final JPanel result = new JPanel();
         result.setLayout(new BorderLayout());
-
-        final JLabel attributeTitleLabel = createAttributeTitleLabel(attributeTitle);
-        result.add(attributeTitleLabel, BorderLayout.WEST);
-        result.add(attributeValueLabel, BorderLayout.CENTER);
+        result.add(c1, BorderLayout.WEST);
+        result.add(c2, BorderLayout.CENTER);
         result.setBackground(new Color(230, 230, 230));
-
         return result;
+    }
+
+    public static JPanel createAttributePanel(String attributeTitle, Component attributeValueComponent) {
+        return create2ComponentPanel(createAttributeTitleLabel(attributeTitle), attributeValueComponent);
     }
 
     public static String booleanAttributeToString(boolean value) {

@@ -3,6 +3,8 @@ package ru.nsu.kondrenko.gui;
 import ru.nsu.kondrenko.gui.view.SwingView;
 import ru.nsu.kondrenko.model.Context;
 import ru.nsu.kondrenko.model.services.ServiceConfig;
+import ru.nsu.kondrenko.model.services.administration_routes.AdministrationRouteService;
+import ru.nsu.kondrenko.model.services.administration_routes.impl.AdministrationRouteServiceImpl;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.customers.impl.CustomerServiceImpl;
 import ru.nsu.kondrenko.model.services.doctors.DoctorService;
@@ -39,6 +41,7 @@ public class Main {
         final PrescriptionService prescriptionService = new PrescriptionServiceImpl(config);
         final ProductionService productionService = new ProductionServiceImpl(config);
         final TechnologyService technologyService = new TechnologyServiceImpl(config);
+        final AdministrationRouteService administrationRouteService = new AdministrationRouteServiceImpl(config);
 
         final Context context = new Context();
 
@@ -52,7 +55,8 @@ public class Main {
                 patientService,
                 prescriptionService,
                 productionService,
-                technologyService
+                technologyService,
+                administrationRouteService
         );
 
         view.show();

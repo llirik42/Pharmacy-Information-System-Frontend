@@ -2,10 +2,7 @@ package ru.nsu.kondrenko.gui.controller.queries;
 
 import ru.nsu.kondrenko.gui.controller.QueryController;
 import ru.nsu.kondrenko.gui.controller.utils.fillers.Filler;
-import ru.nsu.kondrenko.gui.controller.utils.input.DatePicker;
-import ru.nsu.kondrenko.gui.controller.utils.input.DialogPanel;
-import ru.nsu.kondrenko.gui.controller.utils.input.DrugComboBox;
-import ru.nsu.kondrenko.gui.controller.utils.input.DrugTypeComboBox;
+import ru.nsu.kondrenko.gui.controller.utils.input.*;
 import ru.nsu.kondrenko.model.dto.Drug;
 import ru.nsu.kondrenko.model.dto.DrugType;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;

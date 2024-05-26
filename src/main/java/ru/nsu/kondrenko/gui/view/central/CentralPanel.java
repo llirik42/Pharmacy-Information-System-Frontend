@@ -5,6 +5,7 @@ import ru.nsu.kondrenko.gui.view.Constants;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class CentralPanel extends JPanel {
     private static final String TABLE_CARD_NAME = "Table";
@@ -31,7 +32,7 @@ public class CentralPanel extends JPanel {
     @Getter
     private final JLabel titleLabel;
 
-    public CentralPanel() {
+    public CentralPanel(ActionListener confirmCreateOrderListener) {
         setLayout(new BorderLayout());
 
         titleLabel = new JLabel("", SwingConstants.CENTER);
@@ -41,7 +42,7 @@ public class CentralPanel extends JPanel {
         queryResultPanel = new QueryResultPanel();
         drugInfoPanel = new DrugInfoPanel();
         orderInfoPanel = new OrderInfoPanel();
-        orderCreationForm = new OrderCreationForm();
+        orderCreationForm = new OrderCreationForm(confirmCreateOrderListener);
 
         subPanel = new JPanel();
         subPanel.add(queryResultPanel);
