@@ -1,9 +1,9 @@
 package ru.nsu.kondrenko.model.services.orders;
 
-import ru.nsu.kondrenko.model.dto.Customer;
 import ru.nsu.kondrenko.model.dto.Order;
-import ru.nsu.kondrenko.model.dto.Prescription;
 import ru.nsu.kondrenko.model.services.orders.exceptions.OrderServiceException;
+import ru.nsu.kondrenko.model.services.orders.response.OrderObtainResponse;
+import ru.nsu.kondrenko.model.services.orders.response.OrderPaymentResponse;
 
 import java.util.List;
 
@@ -14,13 +14,7 @@ public interface OrderService {
 
     List<Order> getOrdersInProduction() throws OrderServiceException;
 
-    OrderResponse createOrder(Prescription prescription) throws OrderServiceException;
+    OrderPaymentResponse payOrder(int orderId) throws OrderServiceException;
 
-    OrderResponse setOrderCustomer(int orderId, Customer customer) throws OrderServiceException;
-
-    OrderResponse deleteOrderCustomer(int orderId) throws OrderServiceException;
-
-    OrderResponse payForOrder(int orderId) throws OrderServiceException;
-
-    OrderResponse obtainOrder(int orderId) throws OrderServiceException;
+    OrderObtainResponse obtainOrder(int orderId) throws OrderServiceException;
 }

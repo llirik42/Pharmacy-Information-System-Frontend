@@ -3,13 +3,12 @@ package ru.nsu.kondrenko.model.services.orders.impl;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
-import ru.nsu.kondrenko.model.dto.Customer;
 import ru.nsu.kondrenko.model.dto.Order;
-import ru.nsu.kondrenko.model.dto.Prescription;
 import ru.nsu.kondrenko.model.services.ServiceConfig;
-import ru.nsu.kondrenko.model.services.orders.OrderResponse;
 import ru.nsu.kondrenko.model.services.orders.OrderService;
 import ru.nsu.kondrenko.model.services.orders.exceptions.OrderServiceException;
+import ru.nsu.kondrenko.model.services.orders.response.OrderObtainResponse;
+import ru.nsu.kondrenko.model.services.orders.response.OrderPaymentResponse;
 
 import java.util.List;
 
@@ -47,34 +46,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse createOrder(Prescription prescription) throws OrderServiceException {
-        return postOrderResponse(
-                getOrdersUrl(),
-                prescription,
-                "Creating order failed"
-        );
-    }
-
-    @Override
-    public OrderResponse setOrderCustomer(int orderId, Customer customer) throws OrderServiceException {
-        return postOrderResponse(
-                getOrderCustomersUrl(orderId),
-                customer,
-                "Setting customer of order failed"
-        );
-    }
-
-    @Override
-    public OrderResponse deleteOrderCustomer(int orderId) throws OrderServiceException {
-        return deleteOrderResponse(
-                getOrderCustomersUrl(orderId),
-                "Deleting customer of order failed"
-        );
-    }
-
-    @Override
-    public OrderResponse payForOrder(int orderId) throws OrderServiceException {
-        return postOrderResponse(
+    public OrderPaymentResponse payOrder(int orderId) throws OrderServiceException {
+        return postOrderPayment(
                 getPayForOrderUrl(orderId),
                 null,
                 "Payment of order failed"
@@ -82,8 +55,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse obtainOrder(int orderId) throws OrderServiceException {
-        return postOrderResponse(
+    public OrderObtainResponse obtainOrder(int orderId) throws OrderServiceException {
+        return postOrderObtain(
                 getObtainOrderUrl(orderId),
                 null,
                 "Obtaining order failed"
@@ -107,29 +80,28 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private OrderResponse postOrderResponse(String url, Object request, String errorMessage) throws OrderServiceException {
+    private OrderPaymentResponse postOrderPayment(String url, Object request, String errorMessage) throws OrderServiceException {
         final RestTemplate restTemplate = new RestTemplate();
 
         try {
             return restTemplate.postForEntity(
                     url,
                     request,
-                    OrderResponse.class
+                    OrderPaymentResponse.class
             ).getBody();
         } catch (Exception exception) {
             throw new OrderServiceException(errorMessage, exception);
         }
     }
 
-    private OrderResponse deleteOrderResponse(String url, String errorMessage) throws OrderServiceException {
+    private OrderObtainResponse postOrderObtain(String url, Object request, String errorMessage) throws OrderServiceException {
         final RestTemplate restTemplate = new RestTemplate();
 
         try {
-            return restTemplate.exchange(
+            return restTemplate.postForEntity(
                     url,
-                    HttpMethod.DELETE,
-                    null,
-                    OrderResponse.class
+                    request,
+                    OrderObtainResponse.class
             ).getBody();
         } catch (Exception exception) {
             throw new OrderServiceException(errorMessage, exception);
@@ -157,7 +129,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private String getPayForOrderUrl(int orderId) {
-        return getOrderUrl(orderId) + "/pay";
+        return getOrderUrl(orderId) + "/payment";
     }
 
     private String getObtainOrderUrl(int orderId) {
