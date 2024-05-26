@@ -27,7 +27,13 @@ public class DrugComboBox extends JComboBox<String> {
 
     public Drug getSelectedDrug() {
         final int selectedIndex = getSelectedIndex();
-        prevSelectedDrug = selectedIndex == 0 ? null : drugs.get(getDrugIndexByItemIndex(selectedIndex));
+
+        if (selectedIndex == 0 && allowEmpty) {
+            prevSelectedDrug = null;
+        } else {
+            prevSelectedDrug = drugs.get(getDrugIndexByItemIndex(selectedIndex));
+        }
+
         return prevSelectedDrug;
     }
 
