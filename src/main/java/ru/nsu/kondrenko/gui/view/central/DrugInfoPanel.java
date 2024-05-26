@@ -1,13 +1,11 @@
 package ru.nsu.kondrenko.gui.view.central;
 
-import ru.nsu.kondrenko.gui.view.Constants;
 import ru.nsu.kondrenko.model.dto.Drug;
 import ru.nsu.kondrenko.model.dto.DrugType;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class DrugInfoPanel extends JPanel {
+public class DrugInfoPanel extends InfoPanel {
     private final JLabel drugNameLabel;
     private final JLabel drugTypeLabel;
     private final JLabel drugDescriptionLabel;
@@ -16,22 +14,21 @@ public class DrugInfoPanel extends JPanel {
     private final JLabel isCookableLabel;
 
     public DrugInfoPanel() {
-        setBackground(Color.WHITE);
-        setLayout(new GridLayout(6, 1, 0, 30));
+        super(6);
 
-        drugNameLabel = createAttributeValueLabel();
-        drugTypeLabel = createAttributeValueLabel();
-        drugDescriptionLabel = createAttributeValueLabel();
-        drugCostLabel = createAttributeValueLabel();
-        shelfLifeLabel = createAttributeValueLabel();
-        isCookableLabel = createAttributeValueLabel();
+        drugNameLabel = Utils.createAttributeValueLabel();
+        drugTypeLabel = Utils.createAttributeValueLabel();
+        drugDescriptionLabel = Utils.createAttributeValueLabel();
+        drugCostLabel = Utils.createAttributeValueLabel();
+        shelfLifeLabel = Utils.createAttributeValueLabel();
+        isCookableLabel = Utils.createAttributeValueLabel();
 
-        add(createAttributePanel("Название", drugNameLabel));
-        add(createAttributePanel("Тип", drugTypeLabel));
-        add(createAttributePanel("Описание", drugDescriptionLabel));
-        add(createAttributePanel("Стоимость", drugCostLabel));
-        add(createAttributePanel("Срок хранения", shelfLifeLabel));
-        add(createAttributePanel("Можно изготовить", isCookableLabel));
+        add(Utils.createAttributePanel("Название", drugNameLabel));
+        add(Utils.createAttributePanel("Тип", drugTypeLabel));
+        add(Utils.createAttributePanel("Описание", drugDescriptionLabel));
+        add(Utils.createAttributePanel("Стоимость", drugCostLabel));
+        add(Utils.createAttributePanel("Срок хранения", shelfLifeLabel));
+        add(Utils.createAttributePanel("Можно изготовить", isCookableLabel));
     }
 
     public void update(Drug drug) {
@@ -42,32 +39,7 @@ public class DrugInfoPanel extends JPanel {
         drugDescriptionLabel.setText(drug.getDescription());
         drugCostLabel.setText(Integer.toString(drug.getCost()));
         shelfLifeLabel.setText(getShelfLifeRepresentation(drug.getShelfLife()));
-        isCookableLabel.setText(drugType.isCookable() ? "Да" : "Нет");
-    }
-
-    private static JLabel createAttributeValueLabel() {
-        final JLabel label = new JLabel();
-        label.setFont(new Font(Constants.FONT_FAMILY, Font.PLAIN, 18));
-        return label;
-    }
-
-    private static JLabel createAttributeTitleLabel(String attributeTitle) {
-        final JLabel attributeTitleLabel = new JLabel(attributeTitle);
-        attributeTitleLabel.setFont(new Font(Constants.FONT_FAMILY, Font.BOLD, 20));
-        attributeTitleLabel.setPreferredSize(new Dimension(300, -1));
-        return attributeTitleLabel;
-    }
-
-    private static JPanel createAttributePanel(String attributeTitle, JLabel attributeValueLabel) {
-        final JPanel result = new JPanel();
-        result.setLayout(new BorderLayout());
-
-        final JLabel attributeTitleLabel = createAttributeTitleLabel(attributeTitle);
-        result.add(attributeTitleLabel, BorderLayout.WEST);
-        result.add(attributeValueLabel, BorderLayout.CENTER);
-        result.setBackground(new Color(230, 230, 230));
-
-        return result;
+        isCookableLabel.setText(Utils.booleanAttributeToString(drugType.isCookable()));
     }
 
     private static String getShelfLifeRepresentation(int shelfLife) {
