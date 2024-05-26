@@ -39,7 +39,7 @@ public class DrugInfoController extends OptionController {
             return;
         }
 
-        final boolean ok = getView().showConfirmationDialog("Выбор медикаменты", dialogPanel);
+        final boolean ok = getView().showConfirmationDialog("Выбор медикамента", dialogPanel);
         if (!ok) {
             return;
         }
