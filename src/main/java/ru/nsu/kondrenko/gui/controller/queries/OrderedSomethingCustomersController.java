@@ -35,8 +35,8 @@ public class OrderedSomethingCustomersController extends QueryController {
         drugComboBox = new DrugComboBox();
         drugTypeComboBox = new DrugTypeComboBox();
         dialogPanel = new DialogPanel(4);
-        dialogPanel.addComponent("Начало", startDatePicker);
-        dialogPanel.addComponent("Конец", endDatePicker);
+        dialogPanel.addComponent("Начало периода", startDatePicker);
+        dialogPanel.addComponent("Конец периода", endDatePicker);
         dialogPanel.addComponent("Лекарство", drugComboBox);
         dialogPanel.addComponent("Тип лекарства", drugTypeComboBox);
     }

@@ -21,13 +21,13 @@ public class UsedDrugsController extends QueryController {
         startDatePicker = new DatePicker();
         endDatePicker = new DatePicker();
         dialogPanel = new DialogPanel(2);
-        dialogPanel.addComponent("Начало", startDatePicker);
-        dialogPanel.addComponent("Конец", endDatePicker);
+        dialogPanel.addComponent("Начало периода", startDatePicker);
+        dialogPanel.addComponent("Конец периода", endDatePicker);
     }
 
     @Override
     protected List<?> getResult() throws Exception {
-        final boolean ok = getView().showConfirmationDialog("Название", dialogPanel);
+        final boolean ok = getView().showConfirmationDialog("Данные для поиска", dialogPanel);
         if (!ok) {
             return null;
         }

@@ -26,8 +26,8 @@ public class PopularDrugsController extends QueryController {
         limitSpinner = new IntegerSpinner(1, 20, 10);
         drugTypeComboBox = new DrugTypeComboBox();
         dialogPanel = new DialogPanel(2);
-        dialogPanel.addComponent("Кол-во", limitSpinner);
         dialogPanel.addComponent("Тип лекарства", drugTypeComboBox);
+        dialogPanel.addComponent("Количество", limitSpinner);
     }
 
     @Override

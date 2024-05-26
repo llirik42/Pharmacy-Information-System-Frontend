@@ -34,7 +34,7 @@ public class TechnologiesController extends QueryController {
         inProductionCheckbox = new Checkbox();
         dialogPanel = new DialogPanel(3);
         dialogPanel.addComponent("Лекарство", drugComboBox);
-        dialogPanel.addComponent("Тип лекарство", drugTypeComboBox);
+        dialogPanel.addComponent("Тип лекарства", drugTypeComboBox);
         dialogPanel.addComponent("В производстве", inProductionCheckbox);
     }
 
