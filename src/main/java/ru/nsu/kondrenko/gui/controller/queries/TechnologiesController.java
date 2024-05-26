@@ -30,7 +30,7 @@ public class TechnologiesController extends QueryController {
         this.drugService = drugService;
         this.drugTypeService = drugTypeService;
 
-        drugComboBox = new DrugComboBox();
+        drugComboBox = new DrugComboBox(true);
         drugTypeComboBox = new DrugTypeComboBox();
         inProductionCheckbox = new Checkbox();
         dialogPanel = new DialogPanel(3);

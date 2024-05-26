@@ -7,9 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrugComboBox extends JComboBox<String> {
+    private boolean allowEmpty;
+
     private List<Drug> drugs;
 
     private Drug prevSelectedDrug = null;
+
+    public DrugComboBox(boolean allowEmpty) {
+        this.allowEmpty = allowEmpty;
+    }
 
     public void setDrugList(List<Drug> drugs) {
         this.drugs = new ArrayList<>(drugs);
@@ -26,16 +32,26 @@ public class DrugComboBox extends JComboBox<String> {
     }
 
     private void changeModel() {
-        final String[] drugNames = new String[drugs.size() + 1];
+        setModel(new DefaultComboBoxModel<>(getDrugNames()));
+    }
 
-        drugNames[0] = "";
+    private String[] getDrugNames() {
+        final int size = drugs.size();
+        final int drugNamesCount = allowEmpty ? size + 1 : size;
+
+        final String[] drugNames = new String[drugNamesCount];
+
+        if (allowEmpty) {
+            drugNames[0] = "";
+        }
+
         for (int i = 0; i < drugs.size(); i++) {
             final Drug drug = this.drugs.get(i);
             final int itemIndex = getItemIndexByDrugIndex(i);
             drugNames[itemIndex] = drug.getName();
         }
 
-        setModel(new DefaultComboBoxModel<>(drugNames));
+        return drugNames;
     }
 
     private void selectPreviousDrug() {
@@ -49,10 +65,10 @@ public class DrugComboBox extends JComboBox<String> {
     }
 
     private int getItemIndexByDrugIndex(int drugIndex) {
-        return drugIndex + 1;
+        return allowEmpty ? drugIndex + 1 : drugIndex;
     }
 
     private int getDrugIndexByItemIndex(int itemIndex) {
-        return itemIndex - 1;
+        return allowEmpty ? itemIndex - 1 : itemIndex;
     }
 }

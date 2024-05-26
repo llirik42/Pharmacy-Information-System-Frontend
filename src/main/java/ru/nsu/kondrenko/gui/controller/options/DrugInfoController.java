@@ -24,7 +24,7 @@ public class DrugInfoController extends OptionController {
         super(optionName);
 
         this.drugService = drugService;
-        drugComboBox = new DrugComboBox();
+        drugComboBox = new DrugComboBox(false);
         dialogPanel = new DialogPanel(1);
         dialogPanel.addComponent("Медикамент", drugComboBox);
     }

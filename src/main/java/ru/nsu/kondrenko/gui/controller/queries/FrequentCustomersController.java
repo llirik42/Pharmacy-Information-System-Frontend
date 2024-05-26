@@ -28,7 +28,7 @@ public class FrequentCustomersController extends QueryController {
         this.drugService = drugService;
         this.drugTypeService = drugTypeService;
 
-        drugComboBox = new DrugComboBox();
+        drugComboBox = new DrugComboBox(true);
         drugTypeComboBox = new DrugTypeComboBox();
         dialogPanel = new DialogPanel(2);
         dialogPanel.addComponent("Лекарство", drugComboBox);

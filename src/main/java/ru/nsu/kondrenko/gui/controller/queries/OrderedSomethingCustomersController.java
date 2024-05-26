@@ -33,7 +33,7 @@ public class OrderedSomethingCustomersController extends QueryController {
 
         startDatePicker = new DatePicker();
         endDatePicker = new DatePicker();
-        drugComboBox = new DrugComboBox();
+        drugComboBox = new DrugComboBox(true);
         drugTypeComboBox = new DrugTypeComboBox();
         dialogPanel = new DialogPanel(4);
         dialogPanel.addComponent("Начало периода", startDatePicker);
