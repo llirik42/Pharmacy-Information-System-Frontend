@@ -8,6 +8,8 @@ import ru.nsu.kondrenko.model.services.orders.response.OrderPaymentResponse;
 import java.util.List;
 
 public interface OrderService {
+    Order findOrder(int orderId) throws OrderServiceException;
+
     List<Order> getOrders() throws OrderServiceException;
 
     List<Order> getForgottenOrders() throws OrderServiceException;

@@ -1,20 +1,16 @@
 package ru.nsu.kondrenko.gui.controller.options;
 
 import ru.nsu.kondrenko.gui.controller.OptionController;
-import ru.nsu.kondrenko.model.services.orders.OrderService;
 
 import java.awt.event.ActionEvent;
 
 public class CreateOrderController extends OptionController {
-    private final OrderService orderService;
-
-    public CreateOrderController(String optionName, OrderService orderService) {
+    public CreateOrderController(String optionName) {
         super(optionName);
-        this.orderService = orderService;
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        super.actionPerformed(actionEvent);
+        getView().showOrderCreationForm();
     }
 }

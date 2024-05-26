@@ -1,4 +1,4 @@
-package ru.nsu.kondrenko.gui.view;
+package ru.nsu.kondrenko.gui;
 
 import javax.swing.*;
 
@@ -12,4 +12,12 @@ public interface View {
     void showNoConnectionError();
 
     boolean showConfirmationDialog(String title, JPanel content);
+
+    void showTable();
+
+    void showDrugInfo();
+
+    void showOrderInfo();
+
+    void showOrderCreationForm();
 }

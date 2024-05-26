@@ -1,11 +1,15 @@
 package ru.nsu.kondrenko.gui.view;
 
 import com.formdev.flatlaf.intellijthemes.FlatGrayIJTheme;
+import ru.nsu.kondrenko.gui.View;
 import ru.nsu.kondrenko.gui.controller.OptionController;
 import ru.nsu.kondrenko.gui.controller.QueryController;
+import ru.nsu.kondrenko.gui.controller.forms.ConfirmOrderCreationController;
 import ru.nsu.kondrenko.gui.controller.options.*;
 import ru.nsu.kondrenko.gui.controller.queries.*;
 import ru.nsu.kondrenko.gui.controller.utils.fillers.*;
+import ru.nsu.kondrenko.gui.view.central.*;
+import ru.nsu.kondrenko.gui.view.west.OptionsPanel;
 import ru.nsu.kondrenko.model.Context;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.doctors.DoctorService;
@@ -18,10 +22,15 @@ import ru.nsu.kondrenko.model.services.production.ProductionService;
 import ru.nsu.kondrenko.model.services.technologies.TechnologyService;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public class SwingView implements View {
+    private final CentralPanel centralPanel;
+
     private final MainWindow mainWindow;
+
+
 
     public SwingView(
             Context context,
@@ -45,10 +54,21 @@ public class SwingView implements View {
         final Filler storedDrugFiller = new StoredDrugFiller();
         final Filler productionComponentFiller = new ProductionComponentFiller();
 
+        final DrugInfoController drugInfoController = new DrugInfoController(
+                "Информация о медикаменте",
+                drugService
+        );
+        final OrderInfoController orderInfoController = new OrderInfoController(
+                "Информация о заказе",
+                orderService
+        );
+        final ConfirmOrderCreationController confirmOrderCreationController = new ConfirmOrderCreationController(
+                orderService
+        );
+
         final List<OptionController> optionControllers = List.of(
                 new CreateOrderController(
-                        "Оформление заказа",
-                        orderService
+                        "Оформление заказа"
                 ),
                 new PayOrderController(
                         "Оплата заказа",
@@ -58,14 +78,8 @@ public class SwingView implements View {
                         "Получение заказа",
                         orderService
                 ),
-                new DrugInfoController(
-                        "Информация о медикаменте",
-                        drugService
-                ),
-                new OrderInfoController(
-                        "Информация о заказе",
-                        orderService
-                )
+                drugInfoController,
+                orderInfoController
         );
 
         final List<QueryController> queryControllers = List.of(
@@ -154,8 +168,35 @@ public class SwingView implements View {
             it.setContext(context);
         }
 
-        mainWindow = new MainWindow(optionControllers, queryControllers);
+        mainWindow = new MainWindow();
         mainWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        mainWindow.add(new OptionsPanel(optionControllers, queryControllers), BorderLayout.WEST);
+
+        final JPanel optionsPanel = new OptionsPanel(optionControllers, queryControllers);
+
+        centralPanel = new CentralPanel();
+        final QueryResultPanel queryResultPanel = centralPanel.getQueryResultPanel();
+        final DrugInfoPanel drugInfoPanel = centralPanel.getDrugInfoPanel();
+        final OrderInfoPanel orderInfoPanel = centralPanel.getOrderInfoPanel();
+        final OrderCreationForm orderCreationForm = centralPanel.getOrderCreationForm();
+        final JLabel queryNameLabel = centralPanel.getTitleLabel();
+
+        drugInfoController.setDrugInfoPanel(drugInfoPanel);
+        orderInfoController.setOrderInfoPanel(orderInfoPanel);
+        confirmOrderCreationController.setOrderCreationForm(orderCreationForm);
+
+        for (final var it : optionControllers) {
+            it.setTitleLabel(queryNameLabel);
+        }
+
+        for (final var it : queryControllers) {
+            it.setQueryResultPanel(queryResultPanel);
+            it.setTitleLabel(queryNameLabel);
+        }
+
+        mainWindow.add(optionsPanel, BorderLayout.WEST);
+        mainWindow.add(centralPanel, BorderLayout.CENTER);
+        mainWindow.pack();
     }
 
     @Override
@@ -176,6 +217,26 @@ public class SwingView implements View {
                 title,
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION;
+    }
+
+    @Override
+    public void showTable() {
+        centralPanel.showTable();
+    }
+
+    @Override
+    public void showDrugInfo() {
+        centralPanel.showDrugInfo();
+    }
+
+    @Override
+    public void showOrderInfo() {
+        centralPanel.showOrderInfo();
+    }
+
+    @Override
+    public void showOrderCreationForm() {
+        centralPanel.showOrderCreationForm();
     }
 
     @Override

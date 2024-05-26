@@ -1,6 +1,7 @@
-package ru.nsu.kondrenko.gui.view;
+package ru.nsu.kondrenko.gui.view.central;
 
 import lombok.Getter;
+import ru.nsu.kondrenko.gui.view.Constants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,12 +9,10 @@ import java.awt.*;
 import static javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS;
 
 @Getter
-public class CentralPanel extends JPanel {
+public class QueryResultPanel extends JPanel {
     private final JTable table;
 
-    private final JLabel titleLabel;
-
-    public CentralPanel() {
+    public QueryResultPanel() {
         table = new JTable();
         table.setDefaultEditor(Object.class, null);
         table.setShowGrid(true);
@@ -28,10 +27,6 @@ public class CentralPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        titleLabel = new JLabel("", SwingConstants.CENTER);
-        titleLabel.setFont(new Font(Constants.FONT_FAMILY, Font.PLAIN, 16));
-
         add(scrollPane, BorderLayout.CENTER);
-        add(titleLabel, BorderLayout.NORTH);
     }
 }

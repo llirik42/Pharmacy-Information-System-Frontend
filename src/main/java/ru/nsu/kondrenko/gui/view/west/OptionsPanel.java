@@ -1,4 +1,4 @@
-package ru.nsu.kondrenko.gui.view;
+package ru.nsu.kondrenko.gui.view.west;
 
 import ru.nsu.kondrenko.gui.controller.OptionController;
 import ru.nsu.kondrenko.gui.controller.QueryController;
@@ -12,11 +12,11 @@ public class OptionsPanel extends JPanel {
         setPreferredSize(new Dimension(350, -1));
 
         for (final var it : optionControllers) {
-            add(new Option(it.getOptionName(), it));
+            add(new OptionButton(it.getOptionName(), it));
         }
 
         for (final var it : queryControllers) {
-            add(new Option(it.getOptionName(), it));
+            add(new OptionButton(it.getOptionName(), it));
         }
     }
 }

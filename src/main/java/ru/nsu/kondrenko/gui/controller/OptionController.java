@@ -2,7 +2,7 @@ package ru.nsu.kondrenko.gui.controller;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.nsu.kondrenko.gui.view.View;
+import ru.nsu.kondrenko.gui.View;
 import ru.nsu.kondrenko.model.Context;
 
 import javax.swing.*;
@@ -28,6 +28,10 @@ public abstract class OptionController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        setLabel();
+    }
+
+    protected void setLabel() {
         titleLabel.setText(optionName);
     }
 }

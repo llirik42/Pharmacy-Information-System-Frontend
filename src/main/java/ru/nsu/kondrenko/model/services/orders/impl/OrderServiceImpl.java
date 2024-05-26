@@ -9,6 +9,7 @@ import ru.nsu.kondrenko.model.services.orders.OrderService;
 import ru.nsu.kondrenko.model.services.orders.exceptions.OrderServiceException;
 import ru.nsu.kondrenko.model.services.orders.response.OrderObtainResponse;
 import ru.nsu.kondrenko.model.services.orders.response.OrderPaymentResponse;
+import ru.nsu.kondrenko.model.services.orders.response.OrderSearchResponse;
 
 import java.util.List;
 
@@ -19,6 +20,21 @@ public class OrderServiceImpl implements OrderService {
     public OrderServiceImpl(ServiceConfig config) {
         address = config.getAddress();
         port = config.getPort();
+    }
+
+    @Override
+    public Order findOrder(int orderId) throws OrderServiceException {
+        final RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            return restTemplate.getForEntity(
+                    getFindOrderUrl(orderId),
+                    OrderSearchResponse.class,
+                    orderId
+            ).getBody().getOrder();
+        } catch (Exception exception) {
+            throw new OrderServiceException("Searching for order %s failed".formatted(orderId), exception);
+        }
     }
 
     @Override
@@ -134,5 +150,9 @@ public class OrderServiceImpl implements OrderService {
 
     private String getObtainOrderUrl(int orderId) {
         return getOrderUrl(orderId) + "/obtain";
+    }
+
+    private String getFindOrderUrl(int orderId) {
+        return getOrdersUrl() + "/search?order_id=%s".formatted(orderId);
     }
 }

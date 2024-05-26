@@ -1,7 +1,6 @@
 package ru.nsu.kondrenko.gui;
 
 import ru.nsu.kondrenko.gui.view.SwingView;
-import ru.nsu.kondrenko.gui.view.View;
 import ru.nsu.kondrenko.model.Context;
 import ru.nsu.kondrenko.model.services.ServiceConfig;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;

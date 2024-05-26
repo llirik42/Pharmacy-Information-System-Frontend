@@ -3,7 +3,7 @@ package ru.nsu.kondrenko.gui.controller.options;
 import lombok.Setter;
 import ru.nsu.kondrenko.gui.controller.OptionController;
 import ru.nsu.kondrenko.gui.controller.utils.input.DialogPanel;
-import ru.nsu.kondrenko.gui.view.View;
+import ru.nsu.kondrenko.gui.View;
 import ru.nsu.kondrenko.model.services.orders.OrderService;
 import ru.nsu.kondrenko.model.services.orders.exceptions.OrderServiceException;
 import ru.nsu.kondrenko.model.services.orders.response.OrderPaymentResponse;
@@ -31,8 +31,6 @@ public class PayOrderController extends OptionController {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        super.actionPerformed(actionEvent);
-
         final boolean ok = view.showConfirmationDialog("Данные заказа", dialogPanel);
         if (!ok) {
             return;

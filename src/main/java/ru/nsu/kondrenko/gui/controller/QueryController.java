@@ -2,8 +2,8 @@ package ru.nsu.kondrenko.gui.controller;
 
 import lombok.Setter;
 import ru.nsu.kondrenko.gui.controller.utils.fillers.Filler;
+import ru.nsu.kondrenko.gui.view.central.QueryResultPanel;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -11,7 +11,7 @@ public abstract class QueryController extends OptionController {
     private final Filler filler;
 
     @Setter
-    private JTable table;
+    private QueryResultPanel queryResultPanel;
 
     public QueryController(Filler filler, String queryName) {
         super(queryName);
@@ -38,8 +38,9 @@ public abstract class QueryController extends OptionController {
     }
 
     private void fillTable(List<?> result) {
-        filler.fillTable(table, result.toArray());
-        super.actionPerformed(null);
+        filler.fillTable(queryResultPanel.getTable(), result.toArray());
+        setLabel();
+        getView().showTable();
 
         if (result.isEmpty()) {
             getView().showInfo(getNotFoundMessage());
