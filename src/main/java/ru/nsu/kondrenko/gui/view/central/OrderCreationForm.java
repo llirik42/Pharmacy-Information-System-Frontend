@@ -5,11 +5,11 @@ import ru.nsu.kondrenko.gui.controller.utils.input.AdministrationRouteComboBox;
 import ru.nsu.kondrenko.gui.controller.utils.input.DatePicker;
 import ru.nsu.kondrenko.gui.controller.utils.input.DrugComboBox;
 import ru.nsu.kondrenko.gui.controller.utils.input.IntegerSpinner;
+import ru.nsu.kondrenko.gui.view.Constants;
 import ru.nsu.kondrenko.model.dto.*;
 
 import javax.swing.*;
 import java.awt.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -51,6 +51,18 @@ public class OrderCreationForm extends JPanel {
         drugAmountSpinners = new ArrayList<>();
         administrationRouteComboBoxes = new ArrayList<>();
 
+        final Font valueFont = new Font(Constants.FONT_FAMILY, Font.PLAIN, 18);
+        final Font buttonFont = new Font(Constants.FONT_FAMILY, Font.PLAIN, 20);
+
+        customerFullNameField.setFont(valueFont);
+        customerPhoneField.setFont(valueFont);
+        customerAddressField.setFont(valueFont);
+        patientFullNameField.setFont(valueFont);
+        patientBirthDayPicker.setFont(valueFont);
+        diagnosisField.setFont(valueFont);
+        doctorFullNameField.setFont(valueFont);
+        prescriptionDatePicker.setFont(valueFont);
+
         final GridBagLayout layout = new GridBagLayout();
 
         setLayout(layout);
@@ -62,74 +74,68 @@ public class OrderCreationForm extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(50, 0, 0, 0);
 
-        add(new JLabel("Клиент"));
-        add(Utils.createAttributePanel("ФИО", customerFullNameField), gbc);
-        add(Utils.createAttributePanel("Номер телефона", customerPhoneField), gbc);
-        add(Utils.createAttributePanel("Адрес", customerAddressField), gbc);
+        add(Utils.createAttributePanel("ФИО клиента", customerFullNameField), gbc);
+        add(Utils.createAttributePanel("Номер телефона клиента", customerPhoneField), gbc);
+        add(Utils.createAttributePanel("Адрес клиента", customerAddressField), gbc);
 
-        add(new JLabel("Больной"));
-        add(Utils.createAttributePanel("ФИО", patientFullNameField), gbc);
-        add(Utils.createAttributePanel("дата рождения", patientBirthDayPicker), gbc);
+        add(Utils.createAttributePanel("ФИО больного", patientFullNameField), gbc);
+        add(Utils.createAttributePanel("Дата рождения больного", patientBirthDayPicker), gbc);
 
-        add(new Label("Рецепт"));
         add(Utils.createAttributePanel("Диагноз", diagnosisField), gbc);
         add(Utils.createAttributePanel("Врач", doctorFullNameField), gbc);
         add(Utils.createAttributePanel("Дата выписки", prescriptionDatePicker), gbc);
 
-        add(new Label("Медикаменты"));
         add(drugListPanel, gbc);
 
         final JButton removeDrugButton = new JButton("Удалить лекарство");
         final JButton createOrderButton = new JButton("Оформить заказ");
-        final JButton addDrugButton = new JButton("Добавить медикамент");
+        final JButton addDrugButton = new JButton("Добавить лекарство");
+
+        removeDrugButton.setFont(buttonFont);
+        createOrderButton.setFont(buttonFont);
+        addDrugButton.setFont(buttonFont);
 
         createOrderButton.addActionListener(actionListener);
 
-        removeDrugButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (drugComboBoxes.isEmpty()) {
-                    return;
-                }
-
-                drugComboBoxes.remove(drugComboBoxes.size() - 1);
-                administrationRouteComboBoxes.remove(administrationRouteComboBoxes.size() - 1);
-                drugAmountSpinners.remove(drugAmountSpinners.size() - 1);
-
-                drugListPanel.setLayout(new GridLayout(drugComboBoxes.size(), 1));
-                drugListPanel.remove(drugListPanel.getComponentCount() - 1);
-                drugListPanel.revalidate();
+        removeDrugButton.addActionListener(actionEvent -> {
+            if (drugComboBoxes.isEmpty()) {
+                return;
             }
+
+            drugComboBoxes.remove(drugComboBoxes.size() - 1);
+            administrationRouteComboBoxes.remove(administrationRouteComboBoxes.size() - 1);
+            drugAmountSpinners.remove(drugAmountSpinners.size() - 1);
+
+            drugListPanel.setLayout(new GridLayout(drugComboBoxes.size(), 1));
+            drugListPanel.remove(drugListPanel.getComponentCount() - 1);
+            drugListPanel.revalidate();
         });
 
-        addDrugButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                final DrugComboBox drugComboBox = new DrugComboBox(false);
-                final IntegerSpinner drugAmountSpinner = new IntegerSpinner(1, 100, 1);
-                final AdministrationRouteComboBox administrationRouteComboBox = new AdministrationRouteComboBox();
+        addDrugButton.addActionListener(actionEvent -> {
+            final DrugComboBox drugComboBox = new DrugComboBox(false);
+            final IntegerSpinner drugAmountSpinner = new IntegerSpinner(1, 100, 1);
+            final AdministrationRouteComboBox administrationRouteComboBox = new AdministrationRouteComboBox();
 
-                drugComboBox.setDrugList(drugList);
-                administrationRouteComboBox.setAdministrationRoutes(administrationRoutes);
+            drugComboBox.setDrugList(drugList);
+            administrationRouteComboBox.setAdministrationRoutes(administrationRoutes);
 
-                drugComboBoxes.add(drugComboBox);
-                administrationRouteComboBoxes.add(administrationRouteComboBox);
-                drugAmountSpinners.add(drugAmountSpinner);
+            drugComboBoxes.add(drugComboBox);
+            administrationRouteComboBoxes.add(administrationRouteComboBox);
+            drugAmountSpinners.add(drugAmountSpinner);
 
-                final JPanel drugPanel = Utils.create3ComponentPanel(drugComboBox, drugAmountSpinner, administrationRouteComboBox);
+            final JPanel drugPanel = Utils.create3ComponentPanel(drugComboBox, drugAmountSpinner, administrationRouteComboBox);
 
-                drugListPanel.setLayout(new GridLayout(drugComboBoxes.size(), 1));
-                drugListPanel.add(drugPanel);
+            drugListPanel.setLayout(new GridLayout(drugComboBoxes.size(), 1));
+            drugListPanel.add(drugPanel);
 
-                drugListPanel.revalidate();
+            drugListPanel.revalidate();
 
-                final int width = drugListPanel.getWidth();
-                final int size = width / 3;
+            final int width = drugListPanel.getWidth();
+            final int size = width / 3;
 
-                drugComboBox.setPreferredSize(new Dimension(size, 32));
-                drugAmountSpinner.setPreferredSize(new Dimension(size, 32));
-                administrationRouteComboBox.setPreferredSize(new Dimension(size, 32));
-            }
+            drugComboBox.setPreferredSize(new Dimension(size, 32));
+            drugAmountSpinner.setPreferredSize(new Dimension(size, 32));
+            administrationRouteComboBox.setPreferredSize(new Dimension(size, 32));
         });
 
         add(Utils.create3ComponentPanel(removeDrugButton, createOrderButton, addDrugButton), gbc);
