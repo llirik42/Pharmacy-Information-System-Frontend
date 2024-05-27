@@ -7,6 +7,8 @@ import ru.nsu.kondrenko.model.dto.Doctor;
 import ru.nsu.kondrenko.model.services.ServiceConfig;
 import ru.nsu.kondrenko.model.services.doctors.DoctorService;
 import ru.nsu.kondrenko.model.services.doctors.exceptions.DoctorServiceException;
+import ru.nsu.kondrenko.model.services.doctors.requests.DoctorCreationRequest;
+import ru.nsu.kondrenko.model.services.doctors.responses.DoctorCreationResponse;
 
 import java.util.List;
 
@@ -25,6 +27,21 @@ public class DoctorServiceImpl implements DoctorService {
                 getDoctorsUrl(),
                 "Fetching doctors failed"
         );
+    }
+
+    @Override
+    public DoctorCreationResponse createDoctor(DoctorCreationRequest request) throws DoctorServiceException {
+        final RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            return restTemplate.postForEntity(
+                    getDoctorsUrl(),
+                    request,
+                    DoctorCreationResponse.class
+            ).getBody();
+        } catch (Exception exception) {
+            throw new DoctorServiceException("Creation of doctor %s failed".formatted(request), exception);
+        }
     }
 
     private List<Doctor> fetchDoctors(String url, String errorMessage) throws DoctorServiceException {

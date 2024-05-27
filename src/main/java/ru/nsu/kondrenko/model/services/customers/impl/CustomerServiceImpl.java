@@ -51,14 +51,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerCreationResponse createCustomer(String fullName, String phoneNumber, String address) throws CustomerServiceException {
+    public CustomerCreationResponse createCustomer(CustomerCreationRequest request) throws CustomerServiceException {
         final RestTemplate restTemplate = new RestTemplate();
-
-        final CustomerCreationRequest request = new CustomerCreationRequest(
-                fullName,
-                phoneNumber,
-                address
-        );
 
         try {
             return restTemplate.postForEntity(
@@ -68,10 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
             ).getBody();
         } catch (Exception exception) {
             throw new CustomerServiceException(
-                    "Creation of customer %s, %s, %s failed".formatted(
-                            fullName,
-                            phoneNumber,
-                            address),
+                    "Creation of customer %s failed".formatted(request),
                     exception
             );
         }

@@ -7,6 +7,8 @@ import ru.nsu.kondrenko.model.dto.Order;
 import ru.nsu.kondrenko.model.services.ServiceConfig;
 import ru.nsu.kondrenko.model.services.orders.OrderService;
 import ru.nsu.kondrenko.model.services.orders.exceptions.OrderServiceException;
+import ru.nsu.kondrenko.model.services.orders.requests.OrderCreationRequest;
+import ru.nsu.kondrenko.model.services.orders.response.OrderCreationResponse;
 import ru.nsu.kondrenko.model.services.orders.response.OrderObtainResponse;
 import ru.nsu.kondrenko.model.services.orders.response.OrderPaymentResponse;
 import ru.nsu.kondrenko.model.services.orders.response.OrderSearchResponse;
@@ -34,6 +36,21 @@ public class OrderServiceImpl implements OrderService {
             ).getBody().getOrder();
         } catch (Exception exception) {
             throw new OrderServiceException("Searching for order %s failed".formatted(orderId), exception);
+        }
+    }
+
+    @Override
+    public OrderCreationResponse createOrder(OrderCreationRequest request) throws OrderServiceException {
+        final RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            return restTemplate.postForEntity(
+                    getOrdersUrl(),
+                    request,
+                    OrderCreationResponse.class
+            ).getBody();
+        } catch (Exception exception) {
+            throw new OrderServiceException("Creation of order %s failed".formatted(request), exception);
         }
     }
 

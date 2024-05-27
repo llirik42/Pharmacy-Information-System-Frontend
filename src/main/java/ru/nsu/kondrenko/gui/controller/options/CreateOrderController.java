@@ -27,7 +27,7 @@ public class CreateOrderController extends OptionController {
     public void actionPerformed(ActionEvent actionEvent) {
         try {
             orderCreationForm.setDrugList(drugService.getDrugs());
-            orderCreationForm.setAdminitrationRoutes(administrationRouteService.getAdministrationRoutes());
+            orderCreationForm.setAdministrationRoutes(administrationRouteService.getAdministrationRoutes());
             setLabel();
             getView().showOrderCreationForm();
         } catch (DrugServiceException | AdministrationServiceException exception) {

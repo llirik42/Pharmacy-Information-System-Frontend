@@ -42,19 +42,23 @@ public class CentralPanel extends JPanel {
         queryResultPanel = new QueryResultPanel();
         drugInfoPanel = new DrugInfoPanel();
         orderInfoPanel = new OrderInfoPanel();
+
         orderCreationForm = new OrderCreationForm(confirmCreateOrderListener);
+        final JScrollPane orderCreationFormScrollPane = new JScrollPane(orderCreationForm);
+        orderCreationFormScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        orderCreationFormScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         subPanel = new JPanel();
         subPanel.add(queryResultPanel);
         subPanel.add(drugInfoPanel);
         subPanel.add(orderInfoPanel);
-        subPanel.add(orderCreationForm);
+        subPanel.add(orderCreationFormScrollPane);
 
         cardLayout = new CardLayout();
         cardLayout.addLayoutComponent(queryResultPanel, TABLE_CARD_NAME);
         cardLayout.addLayoutComponent(drugInfoPanel, DRUG_INFO_CARD_NAME);
         cardLayout.addLayoutComponent(orderInfoPanel, ORDER_INFO_CARD_NAME);
-        cardLayout.addLayoutComponent(orderCreationForm, ORDER_CREATION_CARD_NAME);
+        cardLayout.addLayoutComponent(orderCreationFormScrollPane, ORDER_CREATION_CARD_NAME);
         subPanel.setLayout(cardLayout);
 
         add(subPanel, BorderLayout.CENTER);

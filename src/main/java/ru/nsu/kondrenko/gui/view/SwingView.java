@@ -175,6 +175,8 @@ public class SwingView implements View {
             it.setContext(context);
         }
 
+        confirmOrderCreationController.setView(this);
+
         mainWindow = new MainWindow();
         mainWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         mainWindow.add(new OptionsPanel(optionControllers, queryControllers), BorderLayout.WEST);

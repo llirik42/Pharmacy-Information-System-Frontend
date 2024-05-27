@@ -28,6 +28,15 @@ public final class Utils {
         result.setBackground(new Color(230, 230, 230));
         return result;
     }
+    public static JPanel create3ComponentPanel(Component c1, Component c2, Component c3) {
+        final JPanel result = new JPanel();
+        result.setLayout(new BorderLayout());
+        result.add(c1, BorderLayout.WEST);
+        result.add(c2, BorderLayout.CENTER);
+        result.add(c3, BorderLayout.EAST);
+        result.setBackground(new Color(230, 230, 230));
+        return result;
+    }
 
     public static JPanel createAttributePanel(String attributeTitle, Component attributeValueComponent) {
         return create2ComponentPanel(createAttributeTitleLabel(attributeTitle), attributeValueComponent);

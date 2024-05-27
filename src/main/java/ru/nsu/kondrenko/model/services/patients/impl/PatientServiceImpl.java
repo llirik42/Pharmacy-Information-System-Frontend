@@ -7,6 +7,8 @@ import ru.nsu.kondrenko.model.dto.Patient;
 import ru.nsu.kondrenko.model.services.ServiceConfig;
 import ru.nsu.kondrenko.model.services.patients.PatientService;
 import ru.nsu.kondrenko.model.services.patients.exceptions.PatientServiceException;
+import ru.nsu.kondrenko.model.services.patients.requests.PatientCreationRequest;
+import ru.nsu.kondrenko.model.services.patients.responses.PatientCreationResponse;
 
 import java.util.List;
 
@@ -25,6 +27,21 @@ public class PatientServiceImpl implements PatientService {
                 getPatientsUrl(),
                 "Fetching patients failed"
         );
+    }
+
+    @Override
+    public PatientCreationResponse createPatient(PatientCreationRequest request) throws PatientServiceException {
+        final RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            return restTemplate.postForEntity(
+                    getPatientsUrl(),
+                    request,
+                    PatientCreationResponse.class
+            ).getBody();
+        } catch (Exception exception) {
+            throw new PatientServiceException("Creation of patient %s failed".formatted(request), exception);
+        }
     }
 
     private List<Patient> fetchPatients(String url, String errorMessage) throws PatientServiceException {

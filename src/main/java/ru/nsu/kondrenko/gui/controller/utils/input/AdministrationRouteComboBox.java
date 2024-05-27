@@ -8,7 +8,7 @@ import java.util.List;
 public class AdministrationRouteComboBox extends JComboBox<String> {
     private List<AdministrationRoute> routes;
 
-    public void setDrugTypeList(List<AdministrationRoute> routes) {
+    public void setAdministrationRoutes(List<AdministrationRoute> routes) {
         this.routes = routes;
         changeModel();
     }
