@@ -28,6 +28,7 @@ public final class Utils {
         result.setBackground(new Color(230, 230, 230));
         return result;
     }
+
     public static JPanel create3ComponentPanel(Component c1, Component c2, Component c3) {
         final JPanel result = new JPanel();
         result.setLayout(new BorderLayout());

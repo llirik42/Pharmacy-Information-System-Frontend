@@ -35,22 +35,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer findCustomer(int customerId) throws CustomerServiceException {
-        final RestTemplate restTemplate = new RestTemplate();
-
-        try {
-            return restTemplate.postForEntity(
-                    getCustomerSearchUrl(),
-                    null,
-                    Customer.class,
-                    customerId
-            ).getBody();
-        } catch (Exception exception) {
-            throw new CustomerServiceException("Searching of customer %s failed".formatted(customerId), exception);
-        }
-    }
-
-    @Override
     public CustomerCreationResponse createCustomer(CustomerCreationRequest request) throws CustomerServiceException {
         final RestTemplate restTemplate = new RestTemplate();
 
@@ -191,9 +175,5 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return url;
-    }
-
-    private String getCustomerSearchUrl() {
-        return getCustomersUrl() + "/search";
     }
 }

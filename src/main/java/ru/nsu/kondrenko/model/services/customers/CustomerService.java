@@ -12,8 +12,6 @@ import java.util.List;
 public interface CustomerService {
     List<Customer> getCustomers() throws CustomerServiceException;
 
-    Customer findCustomer(int customerId) throws CustomerServiceException;
-
     CustomerCreationResponse createCustomer(CustomerCreationRequest request) throws CustomerServiceException;
 
     List<Customer> getWaitingSuppliesCustomers(Integer drugTypeId) throws CustomerServiceException;

@@ -1,9 +1,9 @@
 package ru.nsu.kondrenko.gui.controller.options;
 
 import lombok.Setter;
+import ru.nsu.kondrenko.gui.View;
 import ru.nsu.kondrenko.gui.controller.OptionController;
 import ru.nsu.kondrenko.gui.controller.utils.input.DialogPanel;
-import ru.nsu.kondrenko.gui.View;
 import ru.nsu.kondrenko.model.services.orders.OrderService;
 import ru.nsu.kondrenko.model.services.orders.exceptions.OrderServiceException;
 import ru.nsu.kondrenko.model.services.orders.response.OrderPaymentResponse;

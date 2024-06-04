@@ -5,7 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import ru.nsu.kondrenko.gui.View;
 import ru.nsu.kondrenko.gui.view.central.OrderCreationForm;
-import ru.nsu.kondrenko.model.dto.*;
+import ru.nsu.kondrenko.model.dto.Customer;
+import ru.nsu.kondrenko.model.dto.Doctor;
+import ru.nsu.kondrenko.model.dto.Patient;
+import ru.nsu.kondrenko.model.dto.ShortPrescription;
 import ru.nsu.kondrenko.model.services.customers.CustomerService;
 import ru.nsu.kondrenko.model.services.customers.requests.CustomerCreationRequest;
 import ru.nsu.kondrenko.model.services.customers.responses.CustomerCreationResponse;
@@ -25,7 +28,6 @@ import ru.nsu.kondrenko.model.services.prescription.responses.PrescriptionCreati
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;

@@ -27,14 +27,6 @@ public class DrugTypeServiceImpl implements DrugTypeService {
         );
     }
 
-    @Override
-    public List<DrugType> getCriticalAmountDrugTypes() throws DrugTypeServiceException {
-        return fetchDrugTypes(
-                getCriticalAmountDrugTypesUrl(),
-                "Fetching critical amount drug types failed"
-        );
-    }
-
     private List<DrugType> fetchDrugTypes(String url, String errorMessage) throws DrugTypeServiceException {
         final RestTemplate restTemplate = new RestTemplate();
 
@@ -54,9 +46,5 @@ public class DrugTypeServiceImpl implements DrugTypeService {
 
     private String getDrugTypesUrl() {
         return String.format("http://%s:%s/drug-types/", address, port);
-    }
-
-    private String getCriticalAmountDrugTypesUrl() {
-        return String.format("http://%s:%s/drug-types/critical-amount/", address, port);
     }
 }

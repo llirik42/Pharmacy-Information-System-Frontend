@@ -31,17 +31,6 @@ public class DrugInfoPanel extends InfoPanel {
         add(Utils.createAttributePanel("Можно изготовить", isCookableLabel));
     }
 
-    public void update(Drug drug) {
-        final DrugType drugType = drug.getDrugType();
-
-        drugNameLabel.setText(drug.getName());
-        drugTypeLabel.setText(drugType.getName());
-        drugDescriptionLabel.setText(drug.getDescription());
-        drugCostLabel.setText(Integer.toString(drug.getCost()));
-        shelfLifeLabel.setText(getShelfLifeRepresentation(drug.getShelfLife()));
-        isCookableLabel.setText(Utils.booleanAttributeToString(drugType.isCookable()));
-    }
-
     private static String getShelfLifeRepresentation(int shelfLife) {
         if (shelfLife < 24) {
             return "%s ч.".formatted(shelfLife);
@@ -55,5 +44,16 @@ public class DrugInfoPanel extends InfoPanel {
         } else {
             return "%s д.".formatted(days);
         }
+    }
+
+    public void update(Drug drug) {
+        final DrugType drugType = drug.getDrugType();
+
+        drugNameLabel.setText(drug.getName());
+        drugTypeLabel.setText(drugType.getName());
+        drugDescriptionLabel.setText(drug.getDescription());
+        drugCostLabel.setText(Integer.toString(drug.getCost()));
+        shelfLifeLabel.setText(getShelfLifeRepresentation(drug.getShelfLife()));
+        isCookableLabel.setText(Utils.booleanAttributeToString(drugType.isCookable()));
     }
 }

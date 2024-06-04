@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface DrugTypeService {
     List<DrugType> getDrugTypes() throws DrugTypeServiceException;
-
-    List<DrugType> getCriticalAmountDrugTypes() throws DrugTypeServiceException;
 }

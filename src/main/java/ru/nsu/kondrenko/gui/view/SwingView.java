@@ -69,7 +69,7 @@ public class SwingView implements View {
                 patientService,
                 prescriptionService
         );
-        final CreateOrderController createOrderController =  new CreateOrderController(
+        final CreateOrderController createOrderController = new CreateOrderController(
                 "Оформление заказа",
                 drugService,
                 administrationRouteService

@@ -14,7 +14,6 @@ import ru.nsu.kondrenko.model.services.drug_types.impl.DrugTypeServiceImpl;
 import ru.nsu.kondrenko.model.services.drugs.DrugService;
 import ru.nsu.kondrenko.model.services.drugs.impl.DrugServiceImpl;
 import ru.nsu.kondrenko.model.services.orders.OrderService;
-import ru.nsu.kondrenko.model.services.orders.exceptions.OrderServiceException;
 import ru.nsu.kondrenko.model.services.orders.impl.OrderServiceImpl;
 import ru.nsu.kondrenko.model.services.patients.PatientService;
 import ru.nsu.kondrenko.model.services.patients.impl.PatientServiceImpl;
@@ -26,7 +25,8 @@ import ru.nsu.kondrenko.model.services.technologies.TechnologyService;
 import ru.nsu.kondrenko.model.services.technologies.impl.TechnologyServiceImpl;
 
 public class Main {
-    public static void main(String[] args) throws OrderServiceException {
+    public static void main(String[] args) {
+        // Прибито
         final ServiceConfig config = new ServiceConfig(
                 "localhost",
                 8000
